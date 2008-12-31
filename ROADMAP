@@ -1,0 +1,57 @@
+== Version Roadmap ==
+
+-- 0.0 --
++ Naïve implementation of map, squares, items, rover, lander, and game rules
++ Simple, text-based interface
++ Basic map creation with pseudorandom elevations for each square
++ Items have names
+
+-- 0.1 --
++ Energy consumption for rover movements
++ Rover death (from running out of energy)
++ Small catalog of items to scatter throughout the map
++ Item creator
+
+-- 0.2 --
++ Simple sensors and emitters naïve implementation
++ Rover death from falling (move across a great change in elevation)
++ Medium catalog of items
+
+-- 0.3 --
++ Exit blockage ("Cannot go <direction>: It is blocked.")
++ Items have score points data
++ Points for returning Items to Lander
+
+-- 0.4 --
++ Items have spectrum data for sensors/emitters
++ Simple file-handling implementation for game data (load a map, item set, etc.)
++ GUI experiments begin
+
+-- 0.5 --
++ Better sensors/emitters (Fluorescence)
++ Improvements to file-handling?
++ Creation of game data from another program
+
+-- 0.6 --
++ IPC experiments begin
++ "Real" documentation begins
+
+-- 0.7 --
++ Naïve Java IPC library
+
+-- 0.8 --
++ Naïve Python IPC library bindings?
++ Better GUI
+
+-- 0.9 --
++ Naïve C/C++ IPC library bindings?
+
+-- 1.0 --
++ Full IPC support for at least Java and hopefully Python as well
++ Intuitive and featureful game data creation utility
++ Fully functional GUI
+
+== Long-term wishlist ==
++ Make caves, overpasses, and portals possible
++ Rover death from trying to carry too much
++ Multiple rovers controlled by multiple programs or players (Multiplayer)
