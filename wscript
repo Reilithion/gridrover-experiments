@@ -3,7 +3,7 @@
 # Thomas Nagy, 2008 (ita)
 
 # GridRover Copyright (C) 2008  Lucas Adam M. Paul
-# See LICENSE for full license text
+# See LICENSE.TXT for full license text
 
 import os, Options
 

@@ -128,9 +128,9 @@ public class Experiment
 			}
 		}
 		System.out.println("    GridRover Experiments Copyright (C) 2008  Lucas Adam M. Paul");
-		System.out.println("    This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.");
+		System.out.println("    This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.TXT.");
 		System.out.println("    This is free software, and you are welcome to redistribute it");
-		System.out.println("    under certain conditions; see LICENSE for details.\n");
+		System.out.println("    under certain conditions; see LICENSE.TXT for details.\n");
 		System.out.println("Initializing the Experiment...");
 		Experiment experiment = new Experiment(10, 10);
 		System.out.println("Running the Experiment...");
