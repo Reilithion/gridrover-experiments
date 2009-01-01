@@ -16,6 +16,7 @@
 + Simple sensors and emitters naïve implementation
 + Rover death from falling (move across a great change in elevation)
 + Medium catalog of items
++ Rover can pick up items
 
 -- 0.3 --
 + Exit blockage ("Cannot go <direction>: It is blocked.")
@@ -55,3 +56,4 @@
 + Make caves, overpasses, and portals possible
 + Rover death from trying to carry too much
 + Multiple rovers controlled by multiple programs or players (Multiplayer)
++ Make objects capable of performing actions of their own accord

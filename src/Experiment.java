@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import gridrover.Item;
 import gridrover.Rover;
+import gridrover.Lander;
 import gridrover.MapGrid;
 import gridrover.MapSquare;
 import gridrover.PhysicalObject;
@@ -31,22 +32,24 @@ public class Experiment
 {
 	private MapGrid worldmap;
 	private Rover rover;
+	private Lander lander;
 	private boolean running;
 
 	public Experiment(int width, int length)
 	{
 		worldmap = new MapGrid(width, length);
 		worldmap.fillWithBlank();
-		MapSquare roversquare;
+		MapSquare startsquare;
 		try
 		{
-			roversquare = worldmap.getSquare(width/2, length/2);
+			startsquare = worldmap.getSquare(width/2, length/2);
 		}
 		catch (OutOfBoundsException e)
 		{
 			throw new Error("Something funky happened!  Really funky!", e);
 		}
-		rover = new Rover(185.0, 5.52, roversquare);
+		lander = new Lander(348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		rover = new Rover(185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		running = true;
 	}
 
