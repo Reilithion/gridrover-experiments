@@ -48,8 +48,8 @@ public class Experiment
 		{
 			throw new Error("Something funky happened!  Really funky!", e);
 		}
-		lander = new Lander(348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
-		rover = new Rover(185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		lander = new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		running = true;
 	}
 
@@ -101,7 +101,7 @@ public class Experiment
 		ArrayList<PhysicalObject> contentsOfSquare = location.getInventory();
 		for (PhysicalObject p : contentsOfSquare)
 		{
-			System.out.println("	Physical Object:");
+			System.out.println("	Physical Object: " + p.getName());
 			System.out.println("		Mass = " + p.getMass());
 			System.out.println("		Bulk = " + p.getBulk());
 		}
@@ -173,18 +173,18 @@ public class Experiment
 		if (sampleInv.isEmpty())
 			System.out.println("Inventory empty.");
 		System.out.println("Adding something to the inventory of this square...");
-		Item sampleItem = new Item(5.0, 2.3);
+		Item sampleItem = new Item("Hairbrush", 5.0, 2.3);
 		System.out.println("An Item with mass 5.0 and bulk 2.3.");
 		sampleInv.add(sampleItem);
 		System.out.println("Added.");
-		Rover sampleRover = new Rover(185.0, 5.52, sampleSquare);
+		Rover sampleRover = new Rover("Spirit", 185.0, 5.52, sampleSquare);
 		System.out.println("A Rover with mass 185.0 and bulk 5.52 (figures for Spirit and Opportunity Martian landers).");
 		System.out.println("Added.");
 		System.out.println("Now processing contents of inventory...");
 		sampleInv = sampleSquare.getInventory();
 		for (PhysicalObject p : sampleInv)
 		{
-			System.out.println("Physical Object:");
+			System.out.println("Physical Object: " + p.getName());
 			System.out.println("	Mass = " + p.getMass());
 			System.out.println("	Bulk = " + p.getBulk());
 		}
@@ -194,7 +194,7 @@ public class Experiment
 		System.out.println("Checking to see that it's left this square:");
 		for (PhysicalObject p : sampleInv)
 		{
-			System.out.println("Physical Object:");
+			System.out.println("Physical Object: " + p.getName());
 			System.out.println("	Mass = " + p.getMass());
 			System.out.println("	Bulk = " + p.getBulk());
 		}
@@ -212,7 +212,7 @@ public class Experiment
 		System.out.println("Checking to see if the rover is here:");
 		for (PhysicalObject p : sampleInv)
 		{
-			System.out.println("Physical Object:");
+			System.out.println("Physical Object: " + p.getName());
 			System.out.println("	Mass = " + p.getMass());
 			System.out.println("	Bulk = " + p.getBulk());
 		}

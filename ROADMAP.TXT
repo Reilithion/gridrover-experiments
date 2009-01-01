@@ -4,7 +4,7 @@
 + Naïve implementation of map, squares, items, rover, lander, and game rules
 + Simple, text-based interface
 + Basic map creation with pseudorandom elevations for each square
-+ Items have names
+* Items have names
 
 -- 0.1 --
 + Energy consumption for rover movements

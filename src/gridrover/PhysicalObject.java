@@ -20,6 +20,7 @@ package gridrover;
 
 public interface PhysicalObject
 {
+	public String getName();
 	public double getMass();
 	public double getBulk();
 }

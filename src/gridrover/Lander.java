@@ -23,17 +23,24 @@ import gridrover.PhysicalObject;
 
 public class Lander implements PhysicalObject
 {
+	private String name;
 	private double mass, bulk;
 	private MapSquare location;
 
-	public Lander(double mass, double bulk, MapSquare location)
+	public Lander(String name, double mass, double bulk, MapSquare location)
 	{
+		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
 		this.location = location;
 		location.getInventory().add(this);
 	}
 
+	public String getName()
+	{
+		return name;
+	}
+	
 	public double getMass()
 	{
 		return mass;

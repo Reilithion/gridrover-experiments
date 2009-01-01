@@ -22,12 +22,19 @@ import gridrover.PhysicalObject;
 
 public class Item implements PhysicalObject
 {
+	private String name;
 	private double mass, bulk;
 
-	public Item(double mass, double bulk)
+	public Item(String name, double mass, double bulk)
 	{
+		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 
 	public double getMass()

@@ -24,15 +24,22 @@ import gridrover.MapSquare;
 
 public class Rover implements PhysicalObject
 {
+	private String name;
 	private double mass, bulk;
 	private MapSquare location;
 
-	public Rover(double mass, double bulk, MapSquare location)
+	public Rover(String name, double mass, double bulk, MapSquare location)
 	{
+		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
 		this.location = location;
 		location.getInventory().add(this);
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 	
 	public double getMass()
