@@ -43,6 +43,7 @@ def build(bld):
 		obj.jarname = 'experiment.jar'
 		obj.source_root = 'src'
 		obj.env.append_value('JAVAC', '-source 1.5 -target 1.5')
-		obj.jaropts = '-m ../Manifest.txt '
+		obj.env['JARCREATE'] = obj.env['JARCREATE'] + 'm'
+		obj.jaropts = '../Manifest.txt '
 		build_root = obj.path.find_dir(obj.source_root).abspath(obj.env)
 		obj.jaropts += '-C %s %s' % (build_root, '.')
