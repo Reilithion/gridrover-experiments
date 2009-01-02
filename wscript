@@ -33,17 +33,18 @@ def build(bld):
 		obj = bld.new_task_gen(features='gcj')
 		obj.java_source = '.*java$'
 		obj.source_root = 'src'
-		obj.target = 'experiment'
+		obj.target = 'gridrover'
 		obj.env.append_value('GCJFLAGS', '-I ../src')
-		obj.gcjlinkflags = '--main=Experiment'
+		obj.gcjlinkflags = '--main=gridrover.GridRover'
 		obj.gcjonce = False
 	else:
 		obj = bld.new_task_gen('java')
 		obj.source = '.*java$'
-		obj.jarname = 'experiment.jar'
+		obj.jarname = 'gridrover.jar'
 		obj.source_root = 'src'
 		obj.env.append_value('JAVAC', '-source 1.5 -target 1.5')
 		obj.env['JARCREATE'] = obj.env['JARCREATE'] + 'm'
-		obj.jaropts = '../Manifest.txt '
+		obj.jaropts = '../src/Manifest.txt '
 		build_root = obj.path.find_dir(obj.source_root).abspath(obj.env)
 		obj.jaropts += '-C %s %s' % (build_root, '.')
+
