@@ -57,3 +57,5 @@
 + Rover death from trying to carry too much
 + Multiple rovers controlled by multiple programs or players (Multiplayer)
 + Make objects capable of performing actions of their own accord
++ FireLaser rover command
+

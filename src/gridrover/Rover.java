@@ -18,7 +18,6 @@
 
 package gridrover;
 
-import java.util.ArrayList;
 import gridrover.PhysicalObject;
 import gridrover.MapSquare;
 
