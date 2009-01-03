@@ -19,7 +19,6 @@
 package gridrover;
 
 import gridrover.MapSquare;
-import gridrover.OutOfBoundsException;
 
 public class MapGrid
 {
@@ -46,7 +45,7 @@ public class MapGrid
 	/**
 	Get a square from the map
 	*/
-	public MapSquare getSquare(int x, int y) throws OutOfBoundsException
+	public MapSquare getSquare(int x, int y)
 	{
 		try
 		{
@@ -54,7 +53,7 @@ public class MapGrid
 		}
 		catch (ArrayIndexOutOfBoundsException e)
 		{
-			throw new OutOfBoundsException("Square at [" + x + "] [" + y + "] is out of bounds.", e);
+			return null;
 		}
 	}
 
@@ -105,7 +104,7 @@ public class MapGrid
 	/**
 	Get the square that is in the desired direction from the supplied square
 	*/
-	public MapSquare getSquareDirFrom(String direction, MapSquare start) throws OutOfBoundsException
+	public MapSquare getSquareDirFrom(String direction, MapSquare start)
 	{
 		int x=0, y=0;
 		boolean found = false;

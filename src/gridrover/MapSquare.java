@@ -67,7 +67,7 @@ public class MapSquare
 	/**
 	Get the square direction from this square.
 	*/
-	public MapSquare getSquareDirFrom(String direction) throws OutOfBoundsException
+	public MapSquare getSquareDirFrom(String direction)
 	{
 		return locale.getSquareDirFrom(direction, this);
 	}

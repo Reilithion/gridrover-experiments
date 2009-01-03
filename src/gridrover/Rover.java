@@ -58,15 +58,9 @@ public class Rover implements PhysicalObject
 	
 	public boolean go(String direction)
 	{
-		MapSquare nextLocation;
-		try
-		{
-			nextLocation = location.getSquareDirFrom(direction);
-		}
-		catch (OutOfBoundsException e)
-		{
+		MapSquare nextLocation = location.getSquareDirFrom(direction);
+		if (nextLocation == null)
 			return false;
-		}
 		location.getInventory().remove(this);
 		nextLocation.getInventory().add(this);
 		location = nextLocation;
