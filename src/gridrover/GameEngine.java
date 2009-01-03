@@ -90,6 +90,12 @@ public class GameEngine
 
 	public void go(Command command)
 	{
+		if (command.getArgs().length < 1)
+		{
+			Debug.debug("Argument length of less than 1.  Expected a direction.");
+			controlInterface.commandFailed(command);
+			return;
+		}
 		Debug.debug("Attempting to go " + command.getArgs()[0]);
 		if (rover.go(command.getArgs()[0]))
 			controlInterface.commandSucceeded(command);

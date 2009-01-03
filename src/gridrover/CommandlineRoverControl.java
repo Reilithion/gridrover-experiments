@@ -90,7 +90,11 @@ public class CommandlineRoverControl implements RoverControlInterface
 		switch (command.getCommandWord())
 		{
 		case GO:
-			System.out.println("Unable to move " + command.getArgs()[0]); break;
+			if (command.getArgs().length < 1)
+				System.out.println("Go where?");
+			else
+				System.out.println("Unable to move " + command.getArgs()[0]);
+			break;
 		default:
 			System.out.println("Unknown command failed: " + command.getCommandWord().toString());
 		}
