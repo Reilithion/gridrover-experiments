@@ -24,6 +24,8 @@ public class GridRover
 	{
 		int width = 10;
 		int length = 10;
+		double maxElevation = 25.0;
+		int precision = 2;
 		
 		System.out.println("GridRover Copyright (C) 2008  Lucas Adam M. Paul");
 		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.TXT.");
@@ -31,7 +33,7 @@ public class GridRover
 		System.out.println("under certain conditions; see LICENSE.TXT for details.\n");
 		
 		System.out.println("Initializing GridRover...");
-		GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length);
+		GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
 		
 		System.out.println("Running GridRover...");
 		engine.roverLoop();

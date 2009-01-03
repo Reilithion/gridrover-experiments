@@ -28,9 +28,19 @@ public class MapGrid
 	/**
 	Basic constructor for MapGrid
 	*/
-	public MapGrid(int width, int Length)
+	public MapGrid(int width, int length)
 	{
-		grid = new MapSquare[width][Length];
+		grid = new MapSquare[width][length];
+		fillWithBlank();
+	}
+	
+	/**
+	Random constructor for MapGrid
+	*/
+	public MapGrid(int width, int length, double maxElevation, int precision)
+	{
+		grid = new MapSquare[width][length];
+		fillWithRandom(maxElevation, precision);
 	}
 
 	/**
@@ -74,6 +84,20 @@ public class MapGrid
 			for (int y=0; y < grid[x].length; y++)
 			{
 				grid[x][y] = new MapSquare(this);
+			}
+		}
+	}
+	
+	/**
+	Fill the map with squares of random elevation
+	*/
+	public void fillWithRandom(double maxElevation, int precision)
+	{
+		for (int x=0; x < grid.length; x++)
+		{
+			for (int y=0; y < grid[x].length; y++)
+			{
+				grid[x][y] = new MapSquare(this, Math.floor(Math.random() * (maxElevation * Math.pow(10,  precision))) / Math.pow(10, precision));
 			}
 		}
 	}

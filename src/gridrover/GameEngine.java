@@ -29,7 +29,23 @@ public class GameEngine
 	{
 		this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length);
-		missionMap.fillWithBlank();
+		MapSquare startsquare;
+		try
+		{
+			startsquare = missionMap.getSquare(width/2, length/2);
+		}
+		catch (OutOfBoundsException e)
+		{
+			throw new Error("Something funky happened!  Really funky!", e);
+		}
+		/*lander = */new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+	}
+	
+	public GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
+	{
+		this.controlInterface = controlInterface;
+		missionMap = new MapGrid(width, length, maxElevation, precision);
 		MapSquare startsquare;
 		try
 		{

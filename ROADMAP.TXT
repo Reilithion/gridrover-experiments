@@ -3,7 +3,7 @@
 -- 0.0 --
 * Naïve implementation of map, squares, items, rover, lander, and game rules
 * Simple, text-based interface
-+ Basic map creation with pseudorandom elevations for each square
+* Basic map creation with pseudorandom elevations for each square
 * Items have names
 
 -- 0.1 --
