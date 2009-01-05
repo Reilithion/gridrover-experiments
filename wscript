@@ -23,10 +23,12 @@ def configure(conf):
 
 	if conf.env['GRIDNATIVE']:
 		conf.check_tool('gcj', tooldir='.')
+		if conf.check_java_class('java.util.ArrayList'): conf.fatal('Unable to find JDK.')
+		if conf.check_java_class('java.io.FileOutputStream'): conf.fatal('Unable to find JDK.')
 	else:
 		conf.check_tool('java')
-		#conf.check_java_class('java.io.FileOutputStream')
-		#conf.check_java_class('FakeClass')
+		if conf.check_java_class('java.util.ArrayList'): conf.fatal('Unable to find JDK.')
+		if conf.check_java_class('java.io.FileOutputStream'): conf.fatal('Unable to find JDK.')
 
 def build(bld):
 	if bld.env['GRIDNATIVE']:

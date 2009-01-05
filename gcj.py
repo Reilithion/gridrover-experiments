@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Thomas Nagy, 2006-2008 (ita)
 
-import os, re
+import os, re, subprocess
 from Configure import conf
 import TaskGen, Task, Utils
 from TaskGen import feature, before
@@ -75,5 +75,48 @@ cls.color  = 'GREEN'
 
 def detect(conf):
 	conf.find_program('gcj', var='GCJ')
+	if not conf.env['GCJ']:conf.fatal('gcj is required for building java native executables.')
 	conf.env['GCJLINK'] = conf.env['GCJ']
+
+def check_java_class(self,classname,with_classpath=None):
+	class_check_source="""
+public class Test {
+	public static void main(String[] argv) {
+		Class lib;
+		if (argv.length < 1) {
+			System.err.println("Missing argument");
+			System.exit(77);
+		}
+		try {
+			lib = Class.forName(argv[0]);
+		} catch (ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException");
+			System.exit(1);
+		}
+		lib = null;
+		System.exit(0);
+	}
+}
+"""
+	import shutil
+	javatestdir='.waf-javatest'
+	classpath=javatestdir
+	if self.env['CLASSPATH']:
+		classpath+=os.pathsep+self.env['CLASSPATH']
+	if isinstance(with_classpath,str):
+		classpath+=os.pathsep+with_classpath
+	shutil.rmtree(javatestdir,True)
+	os.mkdir(javatestdir)
+	java_file=open(os.path.join(javatestdir,'Test.java'),'w')
+	java_file.write(class_check_source)
+	java_file.close()
+	subprocess.call([self.env['GCJ'], '--main=Test', os.path.join(javatestdir,'Test.java'), '-o', os.path.join(javatestdir,'Test')], stderr=open(os.devnull, 'w'))
+	cmd=os.path.join(javatestdir,'Test')+' '+classname
+	self.log.write("%s\n"%cmd)
+	found=Utils.exec_command(cmd,shell=True,log=self.log)
+	self.check_message('Java class %s'%classname,"",not found)
+	shutil.rmtree(javatestdir,True)
+	return found
+
+conf(check_java_class)
 
