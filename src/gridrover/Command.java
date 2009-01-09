@@ -22,9 +22,9 @@ package gridrover;
 * This class holds information about a command that was issued by the user.
 * A command currently consists of a CommandWord and an array of Strings
 * representing the arguments to that command.
-* 
+*
 * If the command had only one word, then the array has a length of 0.
-* 
+*
 * @author Lucas Adam M. Paul
 * @version 0.0.0
 */
@@ -32,7 +32,7 @@ public class Command
 {
 	private CommandWord commandWord;
 	private String[] args;
-	
+
 	/**
 	* Create a command object. A CommandWord must be supplied, but any number
 	* of Strings can be provided as arguments.
@@ -45,7 +45,7 @@ public class Command
 		this.commandWord = commandWord;
 		this.args = args;
 	}
-	
+
 	/**
 	* Returns the named component of the Command
 	*/
@@ -53,7 +53,7 @@ public class Command
 	{
 		return commandWord;
 	}
-	
+
 	/**
 	* Returns the arguments component of the Command
 	*/

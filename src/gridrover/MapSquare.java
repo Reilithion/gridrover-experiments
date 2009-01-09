@@ -74,7 +74,7 @@ public class MapSquare
 	{
 		return elevation;
 	}
-	
+
 	/**
 	* Get this Square's inventory.  This is the naïve way to do inventory
 	* management.  Ideally, the MapSquare should do its own inventory
@@ -88,7 +88,7 @@ public class MapSquare
 	{
 		return inventory;
 	}
-	
+
 	/**
 	* Get the square direction from this square.  The variable "direction"
 	* is a String, currently as defined by MapGrid, describing the

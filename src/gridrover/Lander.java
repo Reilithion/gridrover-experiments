@@ -56,7 +56,7 @@ public class Lander implements PhysicalObject
 	{
 		return name;
 	}
-	
+
 	/**
 	* Return the Lander's mass.
 	*
@@ -76,7 +76,7 @@ public class Lander implements PhysicalObject
 	{
 		return bulk;
 	}
-	
+
 	/**
 	* Return the MapSquare where the Lander is.
 	*

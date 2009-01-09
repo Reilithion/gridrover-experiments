@@ -51,7 +51,7 @@ public class CommandlineRoverControl implements RoverControlInterface
 	public Command getNextCommand()
 	{
 		Command command = null;
-		
+
 		while (command == null)
 		{
 			System.out.print("> ");   // Scotty, prompt me up
@@ -67,10 +67,10 @@ public class CommandlineRoverControl implements RoverControlInterface
 				System.exit(1);
 			}
 			String[] words = inputLine.split(" ");
-			
+
 			String[] args = new String[words.length - 1];
 			System.arraycopy(words, 1, args, 0, args.length);
-		
+
 			for (CommandWord w : CommandWord.values())
 			{
 				if (words[0].equalsIgnoreCase(w.toString()))
@@ -80,7 +80,7 @@ public class CommandlineRoverControl implements RoverControlInterface
 			if (command == null)
 				System.out.println("Unrecognized command: " + words[0]);
 		}
-		
+
 		return command;
 	}
 
@@ -105,7 +105,8 @@ public class CommandlineRoverControl implements RoverControlInterface
 		switch (command.getCommandWord())
 		{
 		case GO:
-			System.out.println("Moved " + command.getArgs()[0]); break;
+			System.out.println("Moved " + command.getArgs()[0]);
+			break;
 		default:
 			System.out.println("Unknown command succeeded: " + command.getCommandWord().toString());
 		}

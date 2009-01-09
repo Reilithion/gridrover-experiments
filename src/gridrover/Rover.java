@@ -50,7 +50,7 @@ public class Rover implements PhysicalObject
 		this.location = location;
 		location.getInventory().add(this);
 	}
-	
+
 	/**
 	* Returns the name of the Rover.  "Rover" will suffice.
 	*
@@ -60,7 +60,7 @@ public class Rover implements PhysicalObject
 	{
 		return name;
 	}
-	
+
 	/**
 	* Returns the mass of the Rover in kg.
 	*
@@ -80,7 +80,7 @@ public class Rover implements PhysicalObject
 	{
 		return bulk;
 	}
-	
+
 	/**
 	* Returns the Rover's current location.
 	*
@@ -90,7 +90,7 @@ public class Rover implements PhysicalObject
 	{
 		return location;
 	}
-	
+
 	/**
 	* This method asks the Rover to try to go in a particular direction.
 	* The rover will go in that direction if it is <em>able</em> to go

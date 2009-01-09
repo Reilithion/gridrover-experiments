@@ -39,7 +39,7 @@ public class MapGrid
 		grid = new MapSquare[width][length];
 		fillWithBlank();
 	}
-	
+
 	/**
 	* Random constructor for MapGrid.  Creates a map with squares of random
 	* elevations.  Map will have the specified width and length.  Squares
@@ -109,7 +109,7 @@ public class MapGrid
 			}
 		}
 	}
-	
+
 	/**
 	* Fill the map with squares of random elevation
 	*
@@ -126,7 +126,7 @@ public class MapGrid
 			}
 		}
 	}
-	
+
 	/**
 	* Get the square that is in the desired direction from the supplied square.
 	*
@@ -138,11 +138,11 @@ public class MapGrid
 	{
 		int x=0, y=0;
 		boolean found = false;
-		for(int u=0; u < grid.length; u++)
+		for (int u=0; u < grid.length; u++)
 		{
-			for(int v=0; v < grid[u].length; v++)
+			for (int v=0; v < grid[u].length; v++)
 			{
-				if(start == grid[u][v])
+				if (start == grid[u][v])
 				{
 					found = true;
 					x = u;
@@ -150,15 +150,15 @@ public class MapGrid
 				}
 			}
 		}
-		if(!found)
+		if (!found)
 			return null;
-		if(direction.equals("n"))
+		if (direction.equals("n"))
 			return getSquare(x, y+1);
-		if(direction.equals("s"))
+		if (direction.equals("s"))
 			return getSquare(x, y-1);
-		if(direction.equals("e"))
+		if (direction.equals("e"))
 			return getSquare(x+1, y);
-		if(direction.equals("w"))
+		if (direction.equals("w"))
 			return getSquare(x-1, y);
 		return null;
 	}

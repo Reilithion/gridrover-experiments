@@ -43,7 +43,7 @@ public class Item implements PhysicalObject
 		this.mass = mass;
 		this.bulk = bulk;
 	}
-	
+
 	/**
 	* Returns the name of the item
 	*

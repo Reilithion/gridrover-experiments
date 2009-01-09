@@ -49,10 +49,11 @@ public class GameEngine
 		{
 			throw new Error("Something funky happened!  Really funky!");
 		}
-		/*lander = */new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		/*lander = */
+		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
 		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 	}
-	
+
 	/**
 	* Makes a new game, with specified control interface, and randomly-generated map dimensions.
 	*
@@ -73,7 +74,8 @@ public class GameEngine
 		{
 			throw new Error("Something funky happened!  Really funky!");
 		}
-		/*lander = */new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		/*lander = */
+		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
 		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 	}
 
@@ -90,11 +92,14 @@ public class GameEngine
 			switch (command.getCommandWord())
 			{
 			case QUIT:
-				running = false; break;
+				running = false;
+				break;
 			case GO:
-				go(command); break;
+				go(command);
+				break;
 			case LOOK:
-				look(); break;
+				look();
+				break;
 			case WAIT:
 				break;
 			default:
