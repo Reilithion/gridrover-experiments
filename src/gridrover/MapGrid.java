@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,21 @@ package gridrover;
 
 import gridrover.MapSquare;
 
+/**
+* The MapGrid represents a complete 2D map of a mission zone.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class MapGrid
 {
 	private MapSquare grid[][];
 
 	/**
-	Basic constructor for MapGrid
+	* Makes a new MapGrid with specified width and length.
+	*
+	* @param width East-West width of map
+	* @param length North-South length of map
 	*/
 	public MapGrid(int width, int length)
 	{
@@ -34,7 +43,15 @@ public class MapGrid
 	}
 	
 	/**
-	Random constructor for MapGrid
+	* Random constructor for MapGrid.  Creates a map with squares of random
+	* elevations.  Map will have the specified width and length.  Squares
+	* will not exceed maxElevation in elevation, and elevations will be rounded
+	* to the precision'th digit.  Elevations will also not be negative.
+	*
+	* @param width East-West width of map
+	* @param length North-South length of map
+	* @param maxElevation Upper bound on elevation
+	* @param precision Round elevations to this place
 	*/
 	public MapGrid(int width, int length, double maxElevation, int precision)
 	{
@@ -43,7 +60,11 @@ public class MapGrid
 	}
 
 	/**
-	Get a square from the map
+	* Get a square from the map.
+	*
+	* @param x X coordinate of the requested MapSquare
+	* @param y Y coordinate of the requested MapSquare
+	* @return The requested square
 	*/
 	public MapSquare getSquare(int x, int y)
 	{
@@ -58,7 +79,9 @@ public class MapGrid
 	}
 
 	/**
-	Get the width of the map
+	* Get the width of the map
+	*
+	* @return East-West width of the map
 	*/
 	public int getWidth()
 	{
@@ -66,7 +89,9 @@ public class MapGrid
 	}
 
 	/**
-	Get the Length of the map.
+	* Get the Length of the map.
+	*
+	* @return North-South length of the map
 	*/
 	public int getLength()
 	{
@@ -74,7 +99,7 @@ public class MapGrid
 	}
 
 	/**
-	Fill the map with blank squares
+	* Fill the map with blank squares
 	*/
 	public void fillWithBlank()
 	{
@@ -88,7 +113,10 @@ public class MapGrid
 	}
 	
 	/**
-	Fill the map with squares of random elevation
+	* Fill the map with squares of random elevation
+	*
+	* @param maxElevation Upper bound on elevation
+	* @param precision Round elevations to this place
 	*/
 	public void fillWithRandom(double maxElevation, int precision)
 	{
@@ -102,7 +130,11 @@ public class MapGrid
 	}
 	
 	/**
-	Get the square that is in the desired direction from the supplied square
+	* Get the square that is in the desired direction from the supplied square.
+	*
+	* @param direction One of "n", "s", "e", or "w".
+	* @param start The starting square.  Must be in this MapGrid object.
+	* @return the MapSquare direction from start.
 	*/
 	public MapSquare getSquareDirFrom(String direction, MapSquare start)
 	{
@@ -117,13 +149,9 @@ public class MapGrid
 					found = true;
 					x = u;
 					y = v;
-					// DEBUG
-					// System.out.println("Inside getSquareDirFrom for loop, x = " + x + " y = " + y);
 				}
 			}
 		}
-		// DEBUG
-		// System.out.println("Just outside for loop: x = " + x + " y = " + y);
 		if(!found)
 			return null;
 		if(direction.equals("n"))

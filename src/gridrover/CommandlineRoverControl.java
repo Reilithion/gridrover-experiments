@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul <reilithion@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,15 +23,31 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+* This class acts as an interface between a console user and
+* the GridRover engine.  It allows a single player to control
+* a rover directly.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class CommandlineRoverControl implements RoverControlInterface
 {
 	private BufferedReader reader;
 
+	/**
+	* Create a new CommandlineRoverControl object
+	*/
 	public CommandlineRoverControl()
 	{
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 
+	/**
+	* Get a command from the user and return it
+	*
+	* @return A Command object
+	*/
 	public Command getNextCommand()
 	{
 		Command command = null;
@@ -68,12 +84,22 @@ public class CommandlineRoverControl implements RoverControlInterface
 		return command;
 	}
 
+	/**
+	* Informs the user that the provided command was unknown.
+	*
+	* @param command The command we couldn't recognize
+	*/
 	public void commandUnknown(Command command)
 	{
 		System.err.println("Unknown command \"" + command.getCommandWord().toString() + "\" ... which is weird, because we only produce known commands.");
 		Debug.debug("Something funky happened with the CommandlineRoverControl module.");
 	}
 
+	/**
+	* Informs the user that the provided command succeeded.
+	*
+	* @param command The command that succeeded
+	*/
 	public void commandSucceeded(Command command)
 	{
 		switch (command.getCommandWord())
@@ -85,6 +111,11 @@ public class CommandlineRoverControl implements RoverControlInterface
 		}
 	}
 
+	/**
+	* Informs the user that the provided command failed.
+	*
+	* @param command The command that failed
+	*/
 	public void commandFailed(Command command)
 	{
 		switch (command.getCommandWord())
@@ -100,6 +131,14 @@ public class CommandlineRoverControl implements RoverControlInterface
 		}
 	}
 
+	/**
+	* Describes a given location to the user (usually the result of a "look" command)
+	* Warning:  This method is likely to change somehow to accomodate
+	* limited information available to the rover.  In particular, the
+	* supplied parameter type might change.
+	*
+	* @param location The location to describe to the user
+	*/
 	public void describeLocation(MapSquare location)
 	{
 		System.out.println("Elevation: " + location.getElevation());

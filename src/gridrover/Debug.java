@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul <reilithion@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,21 @@
 
 package gridrover;
 
+/**
+* This class is responsible for collecting debug information from the rest
+* of the program.  If a piece of code somewhere in the project needs to
+* output debug information, it should do so with this class.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class Debug
 {
+	/**
+	* This method outputs debugging information to stderr.
+	*
+	* @param message The debug message to be output or logged.
+	*/
 	public static void debug(String message)
 	{
 		System.err.println("Debug: " + message);

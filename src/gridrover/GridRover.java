@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,20 @@
 
 package gridrover;
 
+/**
+* This class is the main class of the GridRover application.  It initializes the
+* Game Engine.  In the future, it will also interpret command line arguments.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class GridRover
 {
+	/**
+	* This method does the work of getting our application started.
+	*
+	* @param args Command line arguments
+	*/
 	public static void main (String[] args)
 	{
 		int width = 10;

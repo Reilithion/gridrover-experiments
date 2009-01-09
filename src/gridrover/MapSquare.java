@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,15 @@ import java.util.ArrayList;
 import gridrover.PhysicalObject;
 import gridrover.MapGrid;
 
+/**
+* A MapSquare represents a location on the MapGrid that the rover can occupy.
+* A rover can interact with objects and features in the same MapSquare.
+* If a rover wants to interact with objects in a MapSquare other than the
+* one it currently occupies, it must first GO to that MapSquare.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class MapSquare
 {
 	private double elevation;
@@ -29,7 +38,12 @@ public class MapSquare
 	private MapGrid locale;
 
 	/**
-	Basic constructor for MapSquare
+	* Basic constructor for MapSquare.  The MapGrid must be supplied as
+	* an argument to the constructor so that the MapSquare has a
+	* reference back to its locale.  The elevation of a MapSquare
+	* created using this constructor will be 0.0.
+	*
+	* @param locale The MapGrid that this MapSquare is part of
 	*/
 	public MapSquare(MapGrid locale)
 	{
@@ -39,7 +53,12 @@ public class MapSquare
 	}
 
 	/**
-	Constructor for MapSquare that sets an elevation
+	* Constructor for MapSquare that sets an elevation.  Same as the other
+	* constructor, but also takes a double to set the elevation of this
+	* MapSquare.
+	*
+	* @param locale The MapGrid that this MapSquare is part of
+	* @param elevation The elevation of this MapSquare
 	*/
 	public MapSquare(MapGrid locale, double elevation)
 	{
@@ -49,7 +68,9 @@ public class MapSquare
 	}
 
 	/**
-	Get this Square's elevation
+	* Returns this MapSquare's elevation
+	*
+	* @return The elevation, in meters, of this MapSquare
 	*/
 	public double getElevation()
 	{
@@ -57,7 +78,13 @@ public class MapSquare
 	}
 	
 	/**
-	Get this Square's inventory
+	* Get this Square's inventory.  This is the naïve way to do inventory
+	* management.  Ideally, the MapSquare should do its own inventory
+	* management, but this is simpler to implement at the moment.
+	* This method may become deprecated or change in the future.
+	*
+	* @return An ArrayList of PhysicalObjects, representing the contents
+	* of this MapSquare
 	*/
 	public ArrayList<PhysicalObject> getInventory()
 	{
@@ -65,7 +92,13 @@ public class MapSquare
 	}
 	
 	/**
-	Get the square direction from this square.
+	* Get the square direction from this square.  The variable "direction"
+	* is a String, currently as defined by MapGrid, describing the
+	* directional relationship between this square and the desired one.
+	*
+	* @param direction A String describing the directional relationship
+	* between this MapSquare and the desired one.
+	* @return The desired MapSquare, or null if it does not exist.
 	*/
 	public MapSquare getSquareDirFrom(String direction)
 	{

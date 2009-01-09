@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,11 +20,25 @@ package gridrover;
 
 import gridrover.PhysicalObject;
 
+/**
+* This is an item in the GridRover world.  Currently inert, items can be
+* picked up and carried around.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class Item implements PhysicalObject
 {
 	private String name;
 	private double mass, bulk;
 
+	/**
+	* Makes a new item with specified name, mass, and bulk
+	*
+	* @param name A short name for an itme.  Does not need to be unique.
+	* @param mass Mass of an item in kilograms
+	* @param bulk Very rough, boxy estimate of volume in cubic meters
+	*/
 	public Item(String name, double mass, double bulk)
 	{
 		this.name = name;
@@ -32,16 +46,31 @@ public class Item implements PhysicalObject
 		this.bulk = bulk;
 	}
 	
+	/**
+	* Returns the name of the item
+	*
+	* @return Item's name
+	*/
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	* Returns the mass of the item
+	*
+	* @return Item's mass
+	*/
 	public double getMass()
 	{
 		return mass;
 	}
 
+	/**
+	* Returns the bulk of the item
+	*
+	* @return Item's bulk
+	*/
 	public double getBulk()
 	{
 		return bulk;

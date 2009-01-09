@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,12 +21,30 @@ package gridrover;
 import gridrover.PhysicalObject;
 import gridrover.MapSquare;
 
+/**
+* A Rover represents... well, a rover.  It has all the characteristics of a
+* PhysicalObject.  It keeps track of its own location as it moves about the
+* MapGrid.  In the future, it will have an inventory.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class Rover implements PhysicalObject
 {
 	private String name;
 	private double mass, bulk;
 	private MapSquare location;
 
+	/**
+	* Creates a Rover with specified name, mass, bulk, and initial location.
+	* Under normal circumstances, a Rover should be created in the same
+	* MapSquare as its Lander.
+	*
+	* @param name The Rover's name
+	* @param mass The Rover's mass in kg
+	* @param bulk The Rover's bulk, in m^3
+	* @param location The Rover's initial location on the MapGrid
+	*/
 	public Rover(String name, double mass, double bulk, MapSquare location)
 	{
 		this.name = name;
@@ -36,26 +54,58 @@ public class Rover implements PhysicalObject
 		location.getInventory().add(this);
 	}
 	
+	/**
+	* Returns the name of the Rover.  "Rover" will suffice.
+	*
+	* @return Rover's name
+	*/
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	* Returns the mass of the Rover in kg.
+	*
+	* @return Mass of the Rover in kg
+	*/
 	public double getMass()
 	{
 		return mass;
 	}
 
+	/**
+	* Returns the bulk of the rover in cubic meters.
+	*
+	* @return Bulk of the Rover in m^3
+	*/
 	public double getBulk()
 	{
 		return bulk;
 	}
 	
+	/**
+	* Returns the Rover's current location.
+	*
+	* @return Rover's location
+	*/
 	public MapSquare getLocation()
 	{
 		return location;
 	}
 	
+	/**
+	* This method asks the Rover to try to go in a particular direction.
+	* The rover will go in that direction if it is <em>able</em> to go
+	* in that direction -- not if it determines it is <em>safe</em> to
+	* go in that direction.  This command may result in damage to or the
+	* destruction of the rover.
+	*
+	* @param direction The direction the rover should try to travel in
+	* @return True if the rover was able to travel in the desired direction, or
+	*         False if it was blocked.  True will be returned even if the rover
+	*         was damaged or destroyed.
+	*/
 	public boolean go(String direction)
 	{
 		MapSquare nextLocation = location.getSquareDirFrom(direction);

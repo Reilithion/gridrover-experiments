@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul <reilithion@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,14 @@
 
 package gridrover;
 
+/**
+* This is the game engine.  It initializes a map, a rover, and a lander.
+* It interprets all rover commands and is primarily responsible for
+* the game mechanics.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public class GameEngine
 {
 	private RoverControlInterface controlInterface;
@@ -25,6 +33,13 @@ public class GameEngine
 	private Rover rover;
 	//private Lander lander; // Not yet used
 
+	/**
+	* Makes a new game, with specified control interface, and blank map dimensions.
+	*
+	* @param controlInterface The interface with which the user, or program, will control the rover
+	* @param width Desired width of the blank map, in squares
+	* @param length Desired length of the blank map, in squares
+	*/
 	public GameEngine(RoverControlInterface controlInterface, int width, int length)
 	{
 		this.controlInterface = controlInterface;
@@ -38,6 +53,17 @@ public class GameEngine
 		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 	}
 	
+	/**
+	* Makes a new game, with specified control interface, and randomly-generated map dimensions.
+	*
+	* @param controlInterface The interface with which the user, or program, will control the rover
+	* @param width Desired width of the randomly-generated map, in squares
+	* @param length Desired length of the randomly-generated map, in squares
+	* @param maxElevation The maximum elevation of any generated square, in meters
+	* @param precision The precision to which any given elevation might be generated.
+	*                  2, for instance, might result in an elevation of 12.34 and 4
+	*                  might result in an elevation of 12.3456
+	*/
 	public GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
 	{
 		this.controlInterface = controlInterface;
@@ -51,6 +77,9 @@ public class GameEngine
 		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 	}
 
+	/**
+	* This is the main game loop.  Command evaluation takes place here.
+	*/
 	public void roverLoop()
 	{
 		boolean running = true;
@@ -74,12 +103,20 @@ public class GameEngine
 		}
 	}
 
+	/**
+	* Executes the look command
+	*/
 	public void look()
 	{
 		MapSquare location = rover.getLocation();
 		controlInterface.describeLocation(location);
 	}
 
+	/**
+	* Executes the go command
+	*
+	* @param command The command and all its arguments
+	*/
 	public void go(Command command)
 	{
 		if (command.getArgs().length < 1)

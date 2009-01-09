@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  Lucas Adam M. Paul
+    Copyright (C) 2008  "Lucas" Adam M. Paul <reilithion@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,13 @@
 
 package gridrover;
 
+/**
+* This class enumerates our recognized engine commands.  If a command
+* is listed here, our engine should handle it somehow.
+*
+* @author Lucas Adam M. Paul
+* @version 0.0.0
+*/
 public enum CommandWord
 {
 	GO,
