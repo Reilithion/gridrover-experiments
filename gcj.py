@@ -65,7 +65,7 @@ def apply_gcj(self):
 		tsk.env.append_unique('GCJLINKFLAGS', self.gcjlinkflags)
 
 
-cls = Task.simple_task_type('gcj', 'pwd; ${GCJ} ${GCJFLAGS} -c -o ${TGT} ${SRC}')
+cls = Task.simple_task_type('gcj', '${GCJ} ${GCJFLAGS} -c -o ${TGT} ${SRC}')
 cls.before = 'gcj_link jar_create'
 cls.color  = 'BLUE'
 

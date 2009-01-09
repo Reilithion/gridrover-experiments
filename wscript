@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 # encoding: utf-8
-# Thomas Nagy, 2008 (ita)
 
 # GridRover Copyright (C) 2008  Lucas Adam M. Paul
 # See LICENSE.TXT for full license text
@@ -8,7 +7,7 @@
 import os, Options
 
 VERSION='0.0.0'
-APPNAME='gcj_test'
+APPNAME='GridRover'
 
 srcdir = '.'
 blddir = '_build_'
@@ -19,7 +18,6 @@ def set_options(opt):
 def configure(conf):
 	print '--native = %s' % (Options.options.native)
 	conf.env['GRIDNATIVE'] = Options.options.native
-	#print 'GRIDNATIVE = %s' % (conf.env['GRIDNATIVE'])
 
 	if conf.env['GRIDNATIVE']:
 		conf.check_tool('gcj', tooldir='.')
@@ -36,17 +34,16 @@ def build(bld):
 		obj.java_source = '.*java$'
 		obj.source_root = 'src'
 		obj.target = 'gridrover'
-		obj.env.append_value('GCJFLAGS', '-I ../src')
-		obj.gcjlinkflags = '--main=gridrover.GridRover'
+		obj.env.append_value('GCJFLAGS', ['-I', '../src'])
+		obj.gcjlinkflags = ['--main=gridrover.GridRover']
 		obj.gcjonce = False
 	else:
 		obj = bld.new_task_gen('java')
 		obj.source = '.*java$'
 		obj.jarname = 'gridrover.jar'
 		obj.source_root = 'src'
-		obj.env.append_value('JAVAC', '-source 1.5 -target 1.5')
+		obj.env.append_value('JAVAC', ['-source', '1.5', '-target', '1.5'])
 		obj.env['JARCREATE'] = obj.env['JARCREATE'] + 'm'
-		obj.jaropts = '../src/Manifest.txt '
 		build_root = obj.path.find_dir(obj.source_root).abspath(obj.env)
-		obj.jaropts += '-C %s %s' % (build_root, '.')
+		obj.jaropts = ['../src/Manifest.txt', '-C', build_root, '.']
 
