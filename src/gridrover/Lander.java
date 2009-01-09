@@ -18,9 +18,6 @@
 
 package gridrover;
 
-import gridrover.MapSquare;
-import gridrover.PhysicalObject;
-
 /**
 * Represents a Lander that deployed a particular Rover.
 *
@@ -41,7 +38,7 @@ public class Lander implements PhysicalObject
 	* @param bulk Rough, boxy estimate of Lander's volume, in cubic meters.
 	* @param location Place where Lander should put itself on the map.
 	*/
-	public Lander(String name, double mass, double bulk, MapSquare location)
+	protected Lander(String name, double mass, double bulk, MapSquare location)
 	{
 		this.name = name;
 		this.mass = mass;
@@ -85,7 +82,7 @@ public class Lander implements PhysicalObject
 	*
 	* @return Lander's location
 	*/
-	public MapSquare getLocation()
+	private MapSquare getLocation()
 	{
 		return location;
 	}

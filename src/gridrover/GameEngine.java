@@ -40,7 +40,7 @@ public class GameEngine
 	* @param width Desired width of the blank map, in squares
 	* @param length Desired length of the blank map, in squares
 	*/
-	public GameEngine(RoverControlInterface controlInterface, int width, int length)
+	private GameEngine(RoverControlInterface controlInterface, int width, int length)
 	{
 		this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length);
@@ -64,7 +64,7 @@ public class GameEngine
 	*                  2, for instance, might result in an elevation of 12.34 and 4
 	*                  might result in an elevation of 12.3456
 	*/
-	public GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
+	protected GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
 	{
 		this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length, maxElevation, precision);
@@ -80,7 +80,7 @@ public class GameEngine
 	/**
 	* This is the main game loop.  Command evaluation takes place here.
 	*/
-	public void roverLoop()
+	protected void roverLoop()
 	{
 		boolean running = true;
 		Command command;
@@ -106,7 +106,7 @@ public class GameEngine
 	/**
 	* Executes the look command
 	*/
-	public void look()
+	private void look()
 	{
 		MapSquare location = rover.getLocation();
 		controlInterface.describeLocation(location);
@@ -117,7 +117,7 @@ public class GameEngine
 	*
 	* @param command The command and all its arguments
 	*/
-	public void go(Command command)
+	private void go(Command command)
 	{
 		if (command.getArgs().length < 1)
 		{

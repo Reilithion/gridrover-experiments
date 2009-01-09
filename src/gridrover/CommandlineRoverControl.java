@@ -38,7 +38,7 @@ public class CommandlineRoverControl implements RoverControlInterface
 	/**
 	* Create a new CommandlineRoverControl object
 	*/
-	public CommandlineRoverControl()
+	protected CommandlineRoverControl()
 	{
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}

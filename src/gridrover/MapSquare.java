@@ -19,8 +19,6 @@
 package gridrover;
 
 import java.util.ArrayList;
-import gridrover.PhysicalObject;
-import gridrover.MapGrid;
 
 /**
 * A MapSquare represents a location on the MapGrid that the rover can occupy.
@@ -45,7 +43,7 @@ public class MapSquare
 	*
 	* @param locale The MapGrid that this MapSquare is part of
 	*/
-	public MapSquare(MapGrid locale)
+	protected MapSquare(MapGrid locale)
 	{
 		this.locale = locale;
 		this.elevation = 0.0;
@@ -60,7 +58,7 @@ public class MapSquare
 	* @param locale The MapGrid that this MapSquare is part of
 	* @param elevation The elevation of this MapSquare
 	*/
-	public MapSquare(MapGrid locale, double elevation)
+	protected MapSquare(MapGrid locale, double elevation)
 	{
 		this.locale = locale;
 		this.elevation = elevation;
@@ -72,7 +70,7 @@ public class MapSquare
 	*
 	* @return The elevation, in meters, of this MapSquare
 	*/
-	public double getElevation()
+	protected double getElevation()
 	{
 		return elevation;
 	}
@@ -86,7 +84,7 @@ public class MapSquare
 	* @return An ArrayList of PhysicalObjects, representing the contents
 	* of this MapSquare
 	*/
-	public ArrayList<PhysicalObject> getInventory()
+	protected ArrayList<PhysicalObject> getInventory()
 	{
 		return inventory;
 	}
@@ -100,7 +98,7 @@ public class MapSquare
 	* between this MapSquare and the desired one.
 	* @return The desired MapSquare, or null if it does not exist.
 	*/
-	public MapSquare getSquareDirFrom(String direction)
+	protected MapSquare getSquareDirFrom(String direction)
 	{
 		return locale.getSquareDirFrom(direction, this);
 	}

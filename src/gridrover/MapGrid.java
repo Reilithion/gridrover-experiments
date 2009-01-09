@@ -18,8 +18,6 @@
 
 package gridrover;
 
-import gridrover.MapSquare;
-
 /**
 * The MapGrid represents a complete 2D map of a mission zone.
 *
@@ -36,7 +34,7 @@ public class MapGrid
 	* @param width East-West width of map
 	* @param length North-South length of map
 	*/
-	public MapGrid(int width, int length)
+	protected MapGrid(int width, int length)
 	{
 		grid = new MapSquare[width][length];
 		fillWithBlank();
@@ -53,7 +51,7 @@ public class MapGrid
 	* @param maxElevation Upper bound on elevation
 	* @param precision Round elevations to this place
 	*/
-	public MapGrid(int width, int length, double maxElevation, int precision)
+	protected MapGrid(int width, int length, double maxElevation, int precision)
 	{
 		grid = new MapSquare[width][length];
 		fillWithRandom(maxElevation, precision);
@@ -66,7 +64,7 @@ public class MapGrid
 	* @param y Y coordinate of the requested MapSquare
 	* @return The requested square
 	*/
-	public MapSquare getSquare(int x, int y)
+	protected MapSquare getSquare(int x, int y)
 	{
 		try
 		{
@@ -83,7 +81,7 @@ public class MapGrid
 	*
 	* @return East-West width of the map
 	*/
-	public int getWidth()
+	private int getWidth()
 	{
 		return grid.length;
 	}
@@ -93,7 +91,7 @@ public class MapGrid
 	*
 	* @return North-South length of the map
 	*/
-	public int getLength()
+	private int getLength()
 	{
 		return grid[0].length;
 	}
@@ -101,7 +99,7 @@ public class MapGrid
 	/**
 	* Fill the map with blank squares
 	*/
-	public void fillWithBlank()
+	private void fillWithBlank()
 	{
 		for (int x=0; x < grid.length; x++)
 		{
@@ -118,7 +116,7 @@ public class MapGrid
 	* @param maxElevation Upper bound on elevation
 	* @param precision Round elevations to this place
 	*/
-	public void fillWithRandom(double maxElevation, int precision)
+	private void fillWithRandom(double maxElevation, int precision)
 	{
 		for (int x=0; x < grid.length; x++)
 		{
@@ -136,7 +134,7 @@ public class MapGrid
 	* @param start The starting square.  Must be in this MapGrid object.
 	* @return the MapSquare direction from start.
 	*/
-	public MapSquare getSquareDirFrom(String direction, MapSquare start)
+	protected MapSquare getSquareDirFrom(String direction, MapSquare start)
 	{
 		int x=0, y=0;
 		boolean found = false;

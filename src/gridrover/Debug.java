@@ -33,7 +33,7 @@ public class Debug
 	*
 	* @param message The debug message to be output or logged.
 	*/
-	public static void debug(String message)
+	protected static void debug(String message)
 	{
 		System.err.println("Debug: " + message);
 	}

@@ -18,9 +18,6 @@
 
 package gridrover;
 
-import gridrover.PhysicalObject;
-import gridrover.MapSquare;
-
 /**
 * A Rover represents... well, a rover.  It has all the characteristics of a
 * PhysicalObject.  It keeps track of its own location as it moves about the
@@ -45,7 +42,7 @@ public class Rover implements PhysicalObject
 	* @param bulk The Rover's bulk, in m^3
 	* @param location The Rover's initial location on the MapGrid
 	*/
-	public Rover(String name, double mass, double bulk, MapSquare location)
+	protected Rover(String name, double mass, double bulk, MapSquare location)
 	{
 		this.name = name;
 		this.mass = mass;
@@ -89,7 +86,7 @@ public class Rover implements PhysicalObject
 	*
 	* @return Rover's location
 	*/
-	public MapSquare getLocation()
+	protected MapSquare getLocation()
 	{
 		return location;
 	}
@@ -106,7 +103,7 @@ public class Rover implements PhysicalObject
 	*         False if it was blocked.  True will be returned even if the rover
 	*         was damaged or destroyed.
 	*/
-	public boolean go(String direction)
+	protected boolean go(String direction)
 	{
 		MapSquare nextLocation = location.getSquareDirFrom(direction);
 		if (nextLocation == null)

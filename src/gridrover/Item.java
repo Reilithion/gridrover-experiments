@@ -18,8 +18,6 @@
 
 package gridrover;
 
-import gridrover.PhysicalObject;
-
 /**
 * This is an item in the GridRover world.  Currently inert, items can be
 * picked up and carried around.
@@ -39,7 +37,7 @@ public class Item implements PhysicalObject
 	* @param mass Mass of an item in kilograms
 	* @param bulk Very rough, boxy estimate of volume in cubic meters
 	*/
-	public Item(String name, double mass, double bulk)
+	private Item(String name, double mass, double bulk)
 	{
 		this.name = name;
 		this.mass = mass;

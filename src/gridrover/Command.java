@@ -40,7 +40,7 @@ public class Command
 	* @param commandWord A recognized command for the GridRover engine
 	* @param args Arguments to the command
 	*/
-	public Command(CommandWord commandWord, String ... args)
+	protected Command(CommandWord commandWord, String ... args)
 	{
 		this.commandWord = commandWord;
 		this.args = args;
@@ -49,7 +49,7 @@ public class Command
 	/**
 	* Returns the named component of the Command
 	*/
-	public CommandWord getCommandWord()
+	protected CommandWord getCommandWord()
 	{
 		return commandWord;
 	}
@@ -57,8 +57,9 @@ public class Command
 	/**
 	* Returns the arguments component of the Command
 	*/
-	public String[] getArgs()
+	protected String[] getArgs()
 	{
 		return args;
 	}
 }
+
