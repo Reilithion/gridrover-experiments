@@ -31,6 +31,7 @@ public class Rover implements PhysicalObject
 	private String name;
 	private double mass, bulk;
 	private MapSquare location;
+	private RoverControlInterface controlInterface;
 
 	/**
 	* Creates a Rover with specified name, mass, bulk, and initial location.
@@ -41,14 +42,17 @@ public class Rover implements PhysicalObject
 	* @param mass The Rover's mass in kg
 	* @param bulk The Rover's bulk, in m^3
 	* @param location The Rover's initial location on the MapGrid
+	* @param controlInterface The Rover Control Interface that will be used by a player
+	*                         or program to control the rover, and get information back.
 	*/
-	protected Rover(String name, double mass, double bulk, MapSquare location)
+	protected Rover(String name, double mass, double bulk, MapSquare location, RoverControlInterface controlInterface)
 	{
 		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
 		this.location = location;
 		location.getInventory().add(this);
+		this.controlInterface = controlInterface;
 	}
 
 	/**
@@ -89,6 +93,16 @@ public class Rover implements PhysicalObject
 	protected MapSquare getLocation()
 	{
 		return location;
+	}
+
+	/**
+	* Returns this Rover's Rover Control Interface
+	*
+	* @return Rover's controlInterface
+	*/
+	protected RoverControlInterface getControlInterface()
+	{
+		return controlInterface;
 	}
 
 	/**

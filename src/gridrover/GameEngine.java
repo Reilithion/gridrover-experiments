@@ -18,6 +18,9 @@
 
 package gridrover;
 
+import java.util.PriorityQueue;
+import java.util.Calendar;
+
 /**
 * This is the game engine.  It initializes a map, a rover, and a lander.
 * It interprets all rover commands and is primarily responsible for
@@ -32,6 +35,7 @@ public class GameEngine
 	private MapGrid missionMap;
 	private Rover rover;
 	//private Lander lander; // Not yet used
+	private PriorityQueue<Event> eventQueue;
 
 	/**
 	* Makes a new game, with specified control interface, and blank map dimensions.
@@ -40,7 +44,7 @@ public class GameEngine
 	* @param width Desired width of the blank map, in squares
 	* @param length Desired length of the blank map, in squares
 	*/
-	private GameEngine(RoverControlInterface controlInterface, int width, int length)
+	/*private GameEngine(RoverControlInterface controlInterface, int width, int length)
 	{
 		this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length);
@@ -49,10 +53,9 @@ public class GameEngine
 		{
 			throw new Error("Something funky happened!  Really funky!");
 		}
-		/*lander = */
 		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
 		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
-	}
+	}/*
 
 	/**
 	* Makes a new game, with specified control interface, and randomly-generated map dimensions.
@@ -76,7 +79,21 @@ public class GameEngine
 		}
 		/*lander = */
 		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
-		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		rover = new Rover("Rover", 185.0, 5.52, startsquare, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		eventQueue = new PriorityQueue<Event>();
+		Event initialCommand = new CommandEvent(Calendar.getInstance(), eventQueue, rover);
+		eventQueue.add(initialCommand);
+	}
+
+	/**
+	* This is the new main game loop.  Event evaluation takes place here.
+	*/
+	protected void eventLoop()
+	{
+		while (!eventQueue.isEmpty())
+		{
+			eventQueue.poll().apply();
+		}
 	}
 
 	/**

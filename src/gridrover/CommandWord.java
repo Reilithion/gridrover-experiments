@@ -18,6 +18,9 @@
 
 package gridrover;
 
+import java.util.Calendar;
+import java.util.PriorityQueue;
+
 /**
 * This class enumerates our recognized engine commands.  If a command
 * is listed here, our engine should handle it somehow.
@@ -27,8 +30,33 @@ package gridrover;
 */
 public enum CommandWord
 {
-	GO,
-	LOOK,
-	WAIT,
-	QUIT;
+	GO
+	{
+		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
+		{
+		}
+	},
+
+	LOOK
+	{
+		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
+		{
+		}
+	},
+
+	WAIT
+	{
+		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
+		{
+		}
+	},
+
+	QUIT
+	{
+		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
+		{
+		}
+	};
+
+	abstract void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command);
 }
