@@ -48,7 +48,7 @@ public class GridRover
 		GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
 
 		System.out.println("Running GridRover...");
-		engine.roverLoop();
+		engine.eventLoop();
 	}
 }
 

@@ -19,30 +19,41 @@
 package gridrover;
 
 import java.util.Calendar;
-import java.text.DateFormat;
+import java.util.PriorityQueue;
 
 /**
-* This class is responsible for collecting debug information from the rest
-* of the program.  If a piece of code somewhere in the project needs to
-* output debug information, it should do so with this class.
+* Everything that happens in GridRover is represented by a Event.
+* An Event is an event that occurs somewhere in the game.  This is
+* kind of abstract, and meant to be extended by other classes, but
+* all Events have a start time and can be applied.
 *
 * @author Lucas Adam M. Paul
 * @version 0.0.0
 */
-public class Debug
+public abstract class Event
 {
+	protected Calendar startTime;
+	protected PriorityQueue<Event> eventQueue;
+
 	/**
-	* This method outputs debugging information to stderr.
-	*
-	* @param message The debug message to be output or logged.
+	* Do some minimal setup
 	*/
-	protected static void debug(String message)
+	protected Event(Calendar startTime, PriorityQueue<Event> eventQueue)
 	{
-		System.err.println("Debug: " + message);
+		this.startTime = startTime;
+		this.eventQueue = eventQueue;
 	}
 
-	protected static void debug(Calendar time)
+	/**
+	* This method should apply its effects to the game state.
+	*/
+	protected abstract void apply();
+
+	/**
+	* We sort events by their start time.
+	*/
+	public int compareTo(Event anotherEvent)
 	{
-		System.err.println("Debug: " + DateFormat.getDateTimeInstance().format(time.getTime()));
+		return startTime.compareTo(anotherEvent.startTime);
 	}
 }

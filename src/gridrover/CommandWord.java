@@ -34,25 +34,63 @@ public enum CommandWord
 	{
 		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
 		{
+			Calendar eventStartTime = (Calendar) startTime.clone();
+			eventStartTime.add(Calendar.MILLISECOND, 50);
+			if (command.getArgs().length < 1)
+			{
+				Debug.debug("Argument length of less than 1.  Expected a direction.");
+				rover.getControlInterface().commandFailed(command);
+				eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
+				return;
+			}
+			eventQueue.add(new TravelEvent(eventStartTime, eventQueue, rover, command));
 		}
 	},
 
 	LOOK
 	{
+		/*
+		* I kind of cheat in the implementation here.  Shouldn't a "look" be
+		* an event in its own right?
+		*/
 		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
 		{
+			Calendar eventStartTime = (Calendar) startTime.clone();
+			eventStartTime.add(Calendar.MILLISECOND, 50);
+			rover.getControlInterface().describeLocation(rover.getLocation());
+			eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
 		}
 	},
 
 	WAIT
 	{
+		/*
+		* Eventually, I'd like to add argument processing to this method so you
+		* can tell the rover how long to wait.
+		*/
 		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
 		{
+			Calendar eventStartTime = (Calendar) startTime.clone();
+			eventStartTime.add(Calendar.MILLISECOND, 50);
+			eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
 		}
 	},
 
 	QUIT
 	{
+		/*
+		* QUIT's apply method is intentionally empty.  All other command events
+		* need to add a new CommandEvent to the eventQueue in order to keep the
+		* simulation going.  All QUIT has to do in order to end the simulation
+		* is to fail to do this.  The eventQueue, then, must eventually be
+		* exhausted, and when there are no more events to process, the simulation
+		* ends.
+		*
+		* Of course, this may fail to end the simulation if there are any types
+		* of event that can produce new events without user interaction.  For this
+		* reason, a FORCEQUIT command may become necessary in the future.  All it
+		* would need to do is empty the eventQueue.
+		*/
 		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
 		{
 		}
