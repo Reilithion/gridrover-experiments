@@ -79,7 +79,7 @@ public class GameEngine
 		}
 		/*lander = */
 		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
-		rover = new Rover("Rover", 185.0, 5.52, startsquare, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		rover = new Rover("Rover", 185.0, 5.52, 100.0, startsquare, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		eventQueue = new PriorityQueue<Event>();
 		Event initialCommand = new CommandEvent(Calendar.getInstance(), eventQueue, rover);
 		eventQueue.add(initialCommand);

@@ -54,6 +54,8 @@ public class CommandEvent extends Event
 	protected void apply()
 	{
 		Debug.debug(startTime);
+		if (rover.getEnergy() <= 0)
+			return;
 		Command command = rover.getControlInterface().getNextCommand();
 		command.getCommandWord().apply(startTime, eventQueue, rover, command);
 	}

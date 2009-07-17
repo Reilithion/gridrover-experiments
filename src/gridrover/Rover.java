@@ -29,7 +29,7 @@ package gridrover;
 public class Rover implements PhysicalObject
 {
 	private String name;
-	private double mass, bulk;
+	private double mass, bulk, energy, maxEnergy;
 	private MapSquare location;
 	private RoverControlInterface controlInterface;
 
@@ -45,11 +45,12 @@ public class Rover implements PhysicalObject
 	* @param controlInterface The Rover Control Interface that will be used by a player
 	*                         or program to control the rover, and get information back.
 	*/
-	protected Rover(String name, double mass, double bulk, MapSquare location, RoverControlInterface controlInterface)
+	protected Rover(String name, double mass, double bulk, double maxEnergy, MapSquare location, RoverControlInterface controlInterface)
 	{
 		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
+		this.energy = this.maxEnergy = maxEnergy;
 		this.location = location;
 		location.getInventory().add(this);
 		this.controlInterface = controlInterface;
@@ -83,6 +84,16 @@ public class Rover implements PhysicalObject
 	public double getBulk()
 	{
 		return bulk;
+	}
+
+	/**
+	* Returns the Rover's remaining energy.
+	*
+	* @return Rover's energy
+	*/
+	public double getEnergy()
+	{
+		return energy;
 	}
 
 	/**
@@ -120,10 +131,11 @@ public class Rover implements PhysicalObject
 	protected boolean go(String direction)
 	{
 		MapSquare nextLocation = location.getSquareDirFrom(direction);
-		if (nextLocation == null)
+		if (nextLocation == null || energy <= 0)
 			return false;
 		location.getInventory().remove(this);
 		nextLocation.getInventory().add(this);
+		energy -= 5 + (nextLocation.getElevation() - location.getElevation());
 		location = nextLocation;
 		return true;
 	}

@@ -8,7 +8,7 @@
 
 -- 0.0.1 --
 * Event queue
-+ Energy consumption for rover movements
+* Energy consumption for rover movements
 + Rover death (from running out of energy)
 + Small catalog of items to scatter throughout the map
 + Item creator
