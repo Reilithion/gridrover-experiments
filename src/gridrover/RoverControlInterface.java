@@ -17,6 +17,7 @@
 */
 
 package gridrover;
+import java.util.Calendar;
 
 /**
 * A RoverControlInterface must provide all that is required for a user
@@ -35,7 +36,7 @@ public interface RoverControlInterface
 	*
 	* @return The Command provided by the user or program
 	*/
-	public Command getNextCommand();
+	public Command getNextCommand(Calendar now);
 
 	/**
 	* This method should inform the user or program that the command
@@ -71,5 +72,11 @@ public interface RoverControlInterface
 	* @param location The MapSquare on which to provide information
 	*/
 	public void describeLocation(MapSquare location);
-}
 
+	/**
+	* This method should provide information about a Rover's status.
+	*
+	* @param rover The rover whose status is to be gathered and reported
+	*/
+	public void updateStatus(Rover rover);
+}

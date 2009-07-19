@@ -22,6 +22,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.text.DateFormat;
 
 /**
 * This class acts as an interface between a console user and
@@ -48,13 +50,13 @@ public class CommandlineRoverControl implements RoverControlInterface
 	*
 	* @return A Command object
 	*/
-	public Command getNextCommand()
+	public Command getNextCommand(Calendar now)
 	{
 		Command command = null;
 
 		while (command == null)
 		{
-			System.out.print("> ");   // Scotty, prompt me up
+			System.out.print(DateFormat.getDateTimeInstance().format(now.getTime()) + "> ");   // Scotty, prompt me up
 
 			String inputLine = null;
 			try
@@ -152,5 +154,14 @@ public class CommandlineRoverControl implements RoverControlInterface
 			System.out.println("		Bulk = " + p.getBulk());
 		}
 	}
-}
 
+	/**
+	* Describes a Rover's status to the user
+	*
+	* @param rover The rover whose status is to be gathered and reported
+	*/
+	public void updateStatus(Rover rover)
+	{
+		System.out.println("Energy remaining: " + rover.getEnergy());
+	}
+}

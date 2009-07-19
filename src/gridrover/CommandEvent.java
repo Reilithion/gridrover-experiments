@@ -53,10 +53,10 @@ public class CommandEvent extends Event
 	*/
 	protected void apply()
 	{
-		Debug.debug(startTime);
+		//Debug.debug(startTime);
 		if (rover.getEnergy() <= 0)
 			return;
-		Command command = rover.getControlInterface().getNextCommand();
+		Command command = rover.getControlInterface().getNextCommand(startTime);
 		command.getCommandWord().apply(startTime, eventQueue, rover, command);
 	}
 }

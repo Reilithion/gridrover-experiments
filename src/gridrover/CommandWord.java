@@ -76,6 +76,23 @@ public enum CommandWord
 		}
 	},
 
+	STATUS
+	{
+		/*
+		* This command should provide the Control Interface with status about the
+		* Rover that doesn't take a long time to gather, such as remaining energy,
+		* damaged systems and so forth.  Like the LOOK command, this implementation
+		* cheats -- there is no "RoverCheckStatus" event; it happens instantly.
+		*/
+		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
+		{
+			Calendar eventStartTime = (Calendar) startTime.clone();
+			eventStartTime.add(Calendar.MILLISECOND, 50);
+			rover.getControlInterface().updateStatus(rover);
+			eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
+		}
+	},
+
 	QUIT
 	{
 		/*

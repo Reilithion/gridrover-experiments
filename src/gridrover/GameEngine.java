@@ -99,7 +99,7 @@ public class GameEngine
 	/**
 	* This is the main game loop.  Command evaluation takes place here.
 	*/
-	protected void roverLoop()
+	/*protected void roverLoop()
 	{
 		boolean running = true;
 		Command command;
@@ -123,23 +123,23 @@ public class GameEngine
 				controlInterface.commandUnknown(command);
 			}
 		}
-	}
+	}*/
 
 	/**
 	* Executes the look command
 	*/
-	private void look()
+	/*private void look()
 	{
 		MapSquare location = rover.getLocation();
 		controlInterface.describeLocation(location);
-	}
+	}*/
 
 	/**
 	* Executes the go command
 	*
 	* @param command The command and all its arguments
 	*/
-	private void go(Command command)
+	/*private void go(Command command)
 	{
 		if (command.getArgs().length < 1)
 		{
@@ -152,5 +152,5 @@ public class GameEngine
 			controlInterface.commandSucceeded(command);
 		else
 			controlInterface.commandFailed(command);
-	}
+	}*/
 }
