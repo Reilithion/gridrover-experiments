@@ -38,13 +38,11 @@ public class Lander implements PhysicalObject
 	* @param bulk Rough, boxy estimate of Lander's volume, in cubic meters.
 	* @param location Place where Lander should put itself on the map.
 	*/
-	protected Lander(String name, double mass, double bulk, MapSquare location)
+	protected Lander(String name, double mass, double bulk)
 	{
 		this.name = name;
 		this.mass = mass;
 		this.bulk = bulk;
-		this.location = location;
-		location.getInventory().add(this);
 	}
 
 	/**
@@ -85,5 +83,18 @@ public class Lander implements PhysicalObject
 	private MapSquare getLocation()
 	{
 		return location;
+	}
+
+	/**
+	* Sets the Lander's location on the map grid.
+	*
+	* @param location The Lander's location on the MapGrid
+	*/
+	protected void setLocation(MapSquare location)
+	{
+		if (this.location != null)
+			this.location.getInventory().remove(this);
+		this.location = location;
+		location.getInventory().add(this);
 	}
 }

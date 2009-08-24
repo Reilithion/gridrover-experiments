@@ -37,7 +37,7 @@ public class Item implements PhysicalObject
 	* @param mass Mass of an item in kilograms
 	* @param bulk Very rough, boxy estimate of volume in cubic meters
 	*/
-	private Item(String name, double mass, double bulk)
+	protected Item(String name, double mass, double bulk)
 	{
 		this.name = name;
 		this.mass = mass;

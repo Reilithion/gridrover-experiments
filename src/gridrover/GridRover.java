@@ -17,6 +17,15 @@
 */
 
 package gridrover;
+import java.util.prefs.Preferences;
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.File;
+import org.w3c.dom.*;
+import org.xml.sax.*;
+import javax.xml.parsers.*;
 
 /**
 * This class is the main class of the GridRover application.  It initializes the
@@ -27,6 +36,13 @@ package gridrover;
 */
 public class GridRover
 {
+	// Preference keys for this package
+	private static final String MAP_WIDTH = "map_width";
+	private static final String MAP_HEIGHT = "map_height";
+	private static final String MAX_ELEVATION = "max_elevation";
+	private static final String ELEVATION_PRECISION = "elevation_precision";
+	private static final String DATA_FILE_PATH = "data_file_path";
+
 	/**
 	* This method does the work of getting our application started.
 	*
@@ -34,21 +50,114 @@ public class GridRover
 	*/
 	public static void main (String[] args)
 	{
-		int width = 10;
-		int length = 10;
-		double maxElevation = 25.0;
-		int precision = 2;
-
 		System.out.println("GridRover Copyright (C) 2008  Lucas Adam M. Paul");
 		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.TXT.");
 		System.out.println("This is free software, and you are welcome to redistribute it");
 		System.out.println("under certain conditions; see LICENSE.TXT for details.\n");
+
+		System.out.println("Loading preferences...");
+		Preferences prefs = Preferences.userNodeForPackage(GridRover.class);
+		int width = prefs.getInt(MAP_WIDTH, 10);
+		int length = prefs.getInt(MAP_HEIGHT, 10);
+		double maxElevation = prefs.getDouble(MAX_ELEVATION, 25.0);
+		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
+
+		String dataFilePath = prefs.get(DATA_FILE_PATH, null);
+
+		Debug.debug("Data File Path = " + dataFilePath);
+
+		System.out.println("Loading data files...");
+		//TODO: Try the classloader first.  Save the user some mess.
+		while (dataFilePath == null)
+		{
+			System.out.println("No data file path found.  Please type the path to the data files.");
+			System.out.print(">");
+			//TODO: Consolidate console user input code
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			try
+			{
+				dataFilePath = reader.readLine();
+			}
+			catch (IOException ioe)
+			{
+				System.err.println("IO error trying to read from System.in");
+				System.exit(1);
+			}
+		}
+		// Not storing the dataFilePath to its prefs entry until we have a way to reset it.
+		// TODO:  Add a way to reset preferences
+		// TODO:  Store the dataFilePath to our preferences
+		File dataFilePathAbstract = new File(dataFilePath);
+		ArrayList<PhysicalObject> itemPrototypes = loadPhysicalObjects(new File(dataFilePathAbstract, "physical_objects.xml"));
 
 		System.out.println("Initializing GridRover...");
 		GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
 
 		System.out.println("Running GridRover...");
 		engine.eventLoop();
+		System.out.println("All events completed.  GridRover now terminating.");
+	}
+
+	/**
+	* This method produces an ArrayList of PhysicalObjects representing each
+	* type of Physical Object read from the file at the specified URL.
+	*
+	* @param objectsFile The location at which to find the physical_objects.xml file
+	* @return An ArrayList of PhysicalObjects read from the provided file, or an empty ArrayList
+	*/
+	private static ArrayList<PhysicalObject> loadPhysicalObjects(File objectsFile)
+	{
+		ArrayList<PhysicalObject> retVal = new ArrayList<PhysicalObject>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+		try
+		{
+			builder = factory.newDocumentBuilder();
+		}
+		catch (ParserConfigurationException e)
+		{
+			System.out.println("ParserConfigurationException while trying to get a builder.");
+			System.out.println(e.toString());
+			return retVal;
+		}
+		try
+		{
+			Document doc = builder.parse(objectsFile);
+			NodeList itemList = doc.getElementsByTagName("object");
+			int numberOfItems = itemList.getLength();
+			Debug.debug("Number of Items to read from file: " + numberOfItems);
+			for (int i = 0; i < numberOfItems; i++)
+			{
+				String itemName = null;
+				double itemMass = -1.0;
+				double itemBulk = -1.0;
+				Node itemNode = itemList.item(i);
+				NodeList itemPropertyList = itemNode.getChildNodes();
+				for (int j = 0; j < itemPropertyList.getLength(); j++)
+				{
+					Node propertyNode = itemPropertyList.item(j);
+					if (propertyNode.getNodeName() == "name")
+						itemName = propertyNode.getTextContent();
+					if (propertyNode.getNodeName() == "mass")
+						itemMass = Double.parseDouble(propertyNode.getTextContent());
+					if (propertyNode.getNodeName() == "bulk")
+						itemBulk = Double.parseDouble(propertyNode.getTextContent());
+				}
+				Item item = new Item(itemName, itemMass, itemBulk);
+				retVal.add(item);
+			}
+		}
+		catch (SAXException e)
+		{
+			System.out.println("SAXException while trying to parse xml.");
+			System.out.println(e.toString());
+		}
+		catch (IOException e)
+		{
+			System.out.println("IOException while trying to parse xml.");
+			System.out.println("Tried to open: " + objectsFile.toString());
+			System.out.println(e.toString());
+		}
+		return retVal;
 	}
 }
-

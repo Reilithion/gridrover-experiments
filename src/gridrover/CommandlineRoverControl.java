@@ -58,6 +58,7 @@ public class CommandlineRoverControl implements RoverControlInterface
 		{
 			System.out.print(DateFormat.getDateTimeInstance().format(now.getTime()) + "> ");   // Scotty, prompt me up
 
+			//TODO: Consolidate console user input code
 			String inputLine = null;
 			try
 			{

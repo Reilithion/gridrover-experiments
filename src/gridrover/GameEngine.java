@@ -31,9 +31,9 @@ import java.util.Calendar;
 */
 public class GameEngine
 {
-	private RoverControlInterface controlInterface;
+	//private RoverControlInterface controlInterface;
 	private MapGrid missionMap;
-	private Rover rover;
+	//private Rover rover;
 	//private Lander lander; // Not yet used
 	private PriorityQueue<Event> eventQueue;
 
@@ -70,7 +70,7 @@ public class GameEngine
 	*/
 	protected GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
 	{
-		this.controlInterface = controlInterface;
+		//this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length, maxElevation, precision);
 		MapSquare startsquare = missionMap.getSquare(width/2, length/2);
 		if (startsquare == null)
@@ -78,11 +78,39 @@ public class GameEngine
 			throw new Error("Something funky happened!  Really funky!");
 		}
 		/*lander = */
-		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
-		rover = new Rover("Rover", 185.0, 5.52, 100.0, startsquare, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		new Lander("Lander", 348.0, 11.236).setLocation(startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		rover.setLocation(startsquare);
 		eventQueue = new PriorityQueue<Event>();
 		Event initialCommand = new CommandEvent(Calendar.getInstance(), eventQueue, rover);
 		eventQueue.add(initialCommand);
+	}
+
+	/**
+	* Makes a new game with a randomly generated map of the given dimensions.
+	* This constructor does not create a rover.  At least one rover needs to be
+	* supplied via the addRover method in order for the game to really be
+	* playable.
+	*
+	* @param width Desired width of the randomly-generated map, in squares
+	* @param length Desired length of the randomly-generated map, in squares
+	* @param maxElevation The maximum elevation of any generated square, in meters
+	* @param precision The precision to which any given elevation might be generated.
+	*                  2, for instance, might result in an elevation of 12.34 and 4
+	*                  might result in an elevation of 12.3456
+	*/
+	protected GameEngine(int width, int length, double maxElevation, int precision)
+	{
+		missionMap = new MapGrid(width, length, maxElevation, precision);
+		eventQueue = new PriorityQueue<Event>();
+	}
+
+	/**
+	* This method will add a rover to the map grid and give it a starting
+	* command in the event queue.
+	*/
+	protected void addRover(Rover rover, int xPos, int yPos)
+	{
 	}
 
 	/**
