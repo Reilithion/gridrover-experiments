@@ -126,7 +126,7 @@ public class GameEngine
 	/**
 	* Scatters random items randomly across the map.
 	*/
-	protected void scatterItemsRandomly(ArrayList<Item> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	protected void scatterItemsRandomly(ArrayList<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
 		missionMap.scatterItemsRandomly(itemPrototypes, rItemInSquare, maxItemsInSquare);
 	}

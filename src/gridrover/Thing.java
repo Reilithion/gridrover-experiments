@@ -19,25 +19,25 @@
 package gridrover;
 
 /**
-* This is an item in the GridRover world.  Currently inert, items can be
+* This is an item in the GridRover world.  Currently inert, Things can be
 * picked up and carried around.
 *
 * @author Lucas Adam M. Paul
 * @version 0.0.0
 */
-public class Item implements PhysicalObject
+public class Thing
 {
 	private String name;
 	private double mass, bulk;
 
 	/**
-	* Makes a new item with specified name, mass, and bulk
+	* Makes a new Thing with specified name, mass, and bulk
 	*
-	* @param name A short name for an itme.  Does not need to be unique.
-	* @param mass Mass of an item in kilograms
+	* @param name A short name for this Thing.  Does not need to be unique.
+	* @param mass Mass of this Thing in kilograms
 	* @param bulk Very rough, boxy estimate of volume in cubic meters
 	*/
-	protected Item(String name, double mass, double bulk)
+	protected Thing(String name, double mass, double bulk)
 	{
 		this.name = name;
 		this.mass = mass;
@@ -49,7 +49,7 @@ public class Item implements PhysicalObject
 	*
 	* @param that An item to copy
 	*/
-	protected Item(Item that)
+	protected Thing(Thing that)
 	{
 		this.name = that.name;
 		this.mass = that.mass;
@@ -57,9 +57,9 @@ public class Item implements PhysicalObject
 	}
 
 	/**
-	* Returns the name of the item
+	* Returns the name of the Thing
 	*
-	* @return Item's name
+	* @return Thing's name
 	*/
 	public String getName()
 	{
@@ -67,9 +67,9 @@ public class Item implements PhysicalObject
 	}
 
 	/**
-	* Returns the mass of the item
+	* Returns the mass of the Thing
 	*
-	* @return Item's mass
+	* @return Thing's mass
 	*/
 	public double getMass()
 	{
@@ -77,9 +77,9 @@ public class Item implements PhysicalObject
 	}
 
 	/**
-	* Returns the bulk of the item
+	* Returns the bulk of the Thing
 	*
-	* @return Item's bulk
+	* @return Thing's bulk
 	*/
 	public double getBulk()
 	{

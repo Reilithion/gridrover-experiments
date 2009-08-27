@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class MapSquare
 {
 	private double elevation;
-	private ArrayList<PhysicalObject> inventory;
+	private ArrayList<Thing> inventory;
 	private MapGrid locale;
 
 	/**
@@ -47,7 +47,7 @@ public class MapSquare
 	{
 		this.locale = locale;
 		this.elevation = 0.0;
-		inventory = new ArrayList<PhysicalObject>();
+		inventory = new ArrayList<Thing>();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class MapSquare
 	{
 		this.locale = locale;
 		this.elevation = elevation;
-		inventory = new ArrayList<PhysicalObject>();
+		inventory = new ArrayList<Thing>();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class MapSquare
 	* @return An ArrayList of PhysicalObjects, representing the contents
 	* of this MapSquare
 	*/
-	protected ArrayList<PhysicalObject> getInventory()
+	protected ArrayList<Thing> getInventory()
 	{
 		return inventory;
 	}

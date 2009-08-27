@@ -26,10 +26,9 @@ package gridrover;
 * @author Lucas Adam M. Paul
 * @version 0.0.0
 */
-public class Rover implements PhysicalObject
+public class Rover extends Thing
 {
-	private String name;
-	private double mass, bulk, energy, maxEnergy;
+	private double energy, maxEnergy;
 	private MapSquare location;
 	private RoverControlInterface controlInterface;
 
@@ -46,41 +45,9 @@ public class Rover implements PhysicalObject
 	*/
 	protected Rover(String name, double mass, double bulk, double maxEnergy, RoverControlInterface controlInterface)
 	{
-		this.name = name;
-		this.mass = mass;
-		this.bulk = bulk;
+		super(name, mass, bulk);
 		this.energy = this.maxEnergy = maxEnergy;
 		this.controlInterface = controlInterface;
-	}
-
-	/**
-	* Returns the name of the Rover.  "Rover" will suffice.
-	*
-	* @return Rover's name
-	*/
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	* Returns the mass of the Rover in kg.
-	*
-	* @return Mass of the Rover in kg
-	*/
-	public double getMass()
-	{
-		return mass;
-	}
-
-	/**
-	* Returns the bulk of the rover in cubic meters.
-	*
-	* @return Bulk of the Rover in m^3
-	*/
-	public double getBulk()
-	{
-		return bulk;
 	}
 
 	/**

@@ -24,10 +24,8 @@ package gridrover;
 * @author Lucas Adam M. Paul
 * @version 0.0.0
 */
-public class Lander implements PhysicalObject
+public class Lander extends Thing
 {
-	private String name;
-	private double mass, bulk;
 	private MapSquare location;
 
 	/**
@@ -40,39 +38,7 @@ public class Lander implements PhysicalObject
 	*/
 	protected Lander(String name, double mass, double bulk)
 	{
-		this.name = name;
-		this.mass = mass;
-		this.bulk = bulk;
-	}
-
-	/**
-	* Return the Lander's name.
-	*
-	* @return Lander's name
-	*/
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	* Return the Lander's mass.
-	*
-	* @return Lander's mass
-	*/
-	public double getMass()
-	{
-		return mass;
-	}
-
-	/**
-	* Return the Lander's bulk.
-	*
-	* @return Lander's bulk
-	*/
-	public double getBulk()
-	{
-		return bulk;
+		super(name, mass, bulk);
 	}
 
 	/**

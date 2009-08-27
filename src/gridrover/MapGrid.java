@@ -136,7 +136,7 @@ public class MapGrid
 	* @param rItemInSquare The liklihood that any given square will contain any number of items
 	* @param maxItemsInSquare The greatest number of items any square may contain
 	*/
-	protected void scatterItemsRandomly(ArrayList<Item> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	protected void scatterItemsRandomly(ArrayList<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
 		for (int x=0; x < grid.length; x++)
 		{
@@ -149,7 +149,7 @@ public class MapGrid
 					for (int n=0; n < itemsInThisSquare; n++)
 					{
 						int itemIndex = (int) Math.floor(Math.random() * itemPrototypes.size());
-						grid[x][y].getInventory().add(new Item(itemPrototypes.get(itemIndex)));
+						grid[x][y].getInventory().add(new Thing(itemPrototypes.get(itemIndex)));
 					}
 				}
 			}

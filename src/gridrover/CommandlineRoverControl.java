@@ -147,8 +147,8 @@ public class CommandlineRoverControl implements RoverControlInterface
 	{
 		System.out.println("Elevation: " + location.getElevation());
 		System.out.println("Contents of this square:");
-		ArrayList<PhysicalObject> contentsOfSquare = location.getInventory();
-		for (PhysicalObject p : contentsOfSquare)
+		ArrayList<Thing> contentsOfSquare = location.getInventory();
+		for (Thing p : contentsOfSquare)
 		{
 			System.out.println("	Physical Object: " + p.getName());
 			System.out.println("		Mass = " + p.getMass());

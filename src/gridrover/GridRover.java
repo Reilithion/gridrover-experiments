@@ -88,7 +88,7 @@ public class GridRover
 		// TODO:  Add a way to reset preferences
 		// TODO:  Store the dataFilePath to our preferences
 		File dataFilePathAbstract = new File(dataFilePath);
-		ArrayList<Item> itemPrototypes = loadItems(new File(dataFilePathAbstract, "physical_objects.xml"));
+		ArrayList<Thing> itemPrototypes = loadItems(new File(dataFilePathAbstract, "physical_objects.xml"));
 
 		System.out.println("Initializing GridRover...");
 		//GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
@@ -109,9 +109,9 @@ public class GridRover
 	* @param objectsFile The location at which to find the physical_objects.xml file
 	* @return An ArrayList of PhysicalObjects read from the provided file, or an empty ArrayList
 	*/
-	private static ArrayList<Item> loadItems(File objectsFile)
+	private static ArrayList<Thing> loadItems(File objectsFile)
 	{
-		ArrayList<Item> retVal = new ArrayList<Item>();
+		ArrayList<Thing> retVal = new ArrayList<Thing>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		try
@@ -147,7 +147,7 @@ public class GridRover
 					if (propertyNode.getNodeName() == "bulk")
 						itemBulk = Double.parseDouble(propertyNode.getTextContent());
 				}
-				Item item = new Item(itemName, itemMass, itemBulk);
+				Thing item = new Thing(itemName, itemMass, itemBulk);
 				retVal.add(item);
 			}
 		}
