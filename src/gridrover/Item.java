@@ -45,6 +45,18 @@ public class Item implements PhysicalObject
 	}
 
 	/**
+	* Makes a copy of the specified item.
+	*
+	* @param that An item to copy
+	*/
+	protected Item(Item that)
+	{
+		this.name = that.name;
+		this.mass = that.mass;
+		this.bulk = that.bulk;
+	}
+
+	/**
 	* Returns the name of the item
 	*
 	* @return Item's name

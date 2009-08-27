@@ -17,6 +17,7 @@
 */
 
 package gridrover;
+import java.util.ArrayList;
 
 /**
 * The MapGrid represents a complete 2D map of a mission zone.
@@ -123,6 +124,34 @@ public class MapGrid
 			for (int y=0; y < grid[x].length; y++)
 			{
 				grid[x][y] = new MapSquare(this, Math.floor(Math.random() * (maxElevation * Math.pow(10,  precision))) / Math.pow(10, precision));
+			}
+		}
+	}
+
+	/**
+	* Scatter random items from the given ArrayList of item prototypes across the
+	* map.
+	*
+	* @param itemPrototypes An ArrayList containing item types to be scattered
+	* @param rItemInSquare The liklihood that any given square will contain any number of items
+	* @param maxItemsInSquare The greatest number of items any square may contain
+	*/
+	protected void scatterItemsRandomly(ArrayList<Item> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	{
+		for (int x=0; x < grid.length; x++)
+		{
+			for (int y=0; y < grid[x].length; y++)
+			{
+				//TODO: Consolidate randomness
+				if (Math.random() > rItemInSquare)
+				{
+					int itemsInThisSquare = (int) Math.ceil(Math.random() * maxItemsInSquare);
+					for (int n=0; n < itemsInThisSquare; n++)
+					{
+						int itemIndex = (int) Math.floor(Math.random() * itemPrototypes.size());
+						grid[x][y].getInventory().add(new Item(itemPrototypes.get(itemIndex)));
+					}
+				}
 			}
 		}
 	}

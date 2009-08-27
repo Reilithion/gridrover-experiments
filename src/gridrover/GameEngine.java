@@ -20,6 +20,7 @@ package gridrover;
 
 import java.util.PriorityQueue;
 import java.util.Calendar;
+import java.util.ArrayList;
 
 /**
 * This is the game engine.  It initializes a map, a rover, and a lander.
@@ -111,6 +112,23 @@ public class GameEngine
 	*/
 	protected void addRover(Rover rover, int xPos, int yPos)
 	{
+		MapSquare startsquare = missionMap.getSquare(xPos, yPos);
+		if (startsquare == null)
+		{
+			throw new Error("Could not locate start square for rover.");
+		}
+		new Lander("Lander", 348.0, 11.236).setLocation(startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
+		rover.setLocation(startsquare);
+		Event initialCommand = new CommandEvent(Calendar.getInstance(), eventQueue, rover);
+		eventQueue.add(initialCommand);
+	}
+
+	/**
+	* Scatters random items randomly across the map.
+	*/
+	protected void scatterItemsRandomly(ArrayList<Item> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	{
+		missionMap.scatterItemsRandomly(itemPrototypes, rItemInSquare, maxItemsInSquare);
 	}
 
 	/**

@@ -88,10 +88,14 @@ public class GridRover
 		// TODO:  Add a way to reset preferences
 		// TODO:  Store the dataFilePath to our preferences
 		File dataFilePathAbstract = new File(dataFilePath);
-		ArrayList<PhysicalObject> itemPrototypes = loadPhysicalObjects(new File(dataFilePathAbstract, "physical_objects.xml"));
+		ArrayList<Item> itemPrototypes = loadItems(new File(dataFilePathAbstract, "physical_objects.xml"));
 
 		System.out.println("Initializing GridRover...");
-		GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
+		//GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
+		GameEngine engine = new GameEngine(width, length, maxElevation, precision);
+		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, new CommandlineRoverControl()); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
+		engine.addRover(rover, width/2, length/2); // Add a single rover in the middle of the map
+		engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
 
 		System.out.println("Running GridRover...");
 		engine.eventLoop();
@@ -105,9 +109,9 @@ public class GridRover
 	* @param objectsFile The location at which to find the physical_objects.xml file
 	* @return An ArrayList of PhysicalObjects read from the provided file, or an empty ArrayList
 	*/
-	private static ArrayList<PhysicalObject> loadPhysicalObjects(File objectsFile)
+	private static ArrayList<Item> loadItems(File objectsFile)
 	{
-		ArrayList<PhysicalObject> retVal = new ArrayList<PhysicalObject>();
+		ArrayList<Item> retVal = new ArrayList<Item>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		try
