@@ -1,0 +1,341 @@
+Physical Objects
+
+This file documents the physical_objects.xml file, which is one of the data
+files used by GridRover, a programming game by Lucas Adam M. Paul et al.
+
+The physical_objects.xml file describes all of the types of physical objects
+that can be simulated in GridRover.  These range from simple items that can be
+picked up by the Rover and returned to the lander for points to components of
+the Rover, the lander, and even the Rover itself.
+
+Please note that this document is a work in progress and is subject to possibly
+rapid change.  At the time this paragraph was last edited, NONE of the features
+described within this document have actually been implemented in the GridRover
+engine.
+
+1. File Structure
+
+The physical_objects.xml file has a top-level tag called OBJECTS.  Due to the
+way GridRover parses xml, the tag name is case-insensitive.  In fact, with the
+way GridRover currently parses xml, you could call the top-level tag MouseFACE
+and the game would still work.  As long as there's an enclosing tag around all
+the other tags in the file, GridRover will read physical objects from the file.
+This is an empty physical_objects.xml file:
+
+<objects>
+</objects>
+
+2. Simple Objects
+
+Any physical object in GridRover that is not a rover, lander, or piece of
+equipment is referred to as a Thing.  Small enough Things can be picked up by a
+rover.  Larger Things might be tweaked or lasered or might present opportunities
+to gain points in other ways.  Or they might just get in the way or serve as
+distractions.
+
+Every Thing in GridRover has at least three attributes (this MUST and WILL be
+expanded in later versions of GridRover): a name, a mass, and a bulk.
+
+Name: This is a string that represents a VERY SHORT identifier for the Thing.
+It need not be unique.  There are no hard rules about what form the name of a
+Thing may take, but by convention in the default GridRover data set, it
+consists of a word with the first letter capitalized.
+
+Mass: The mass of a Thing is stored as a double-precision floating point
+number.  Data sets should specify in a comment the unit of measurement used for
+all masses.  The default GridRover data set uses kilograms.
+
+Bulk: The bulk of a Thing is stored as a double-precision floating point
+number.  Data sets should specify in a comment the unit of measurement used for
+all bulks.  The default GridRover data set uses meters cubed.  IMPORTANT NOTE:
+Bulk is NOT the same thing as volume!  It is a much more approximate value
+intended to represent approximately how much space an object will occupy while
+inside the storage compartment of a rover.  If the rover picks up a sea urchin,
+for instance, the sea urchin might have an exact volume of 0.2153 cubic meters.
+But its spines reach out 1/2 meter from its core, so its bulk is 1 cubic meter!
+
+Within the physical_objects.xml file, a Thing is defined as follows:
+
+	<thing>
+		<name>NAME</name>
+		<mass>MASS</mass>
+		<bulk>BULK</bulk>
+	</thing>
+
+Where NAME is the name of the Thing, MASS is its mass, and BULK is its bulk.
+MASS and BULK are raw double-precision floating point values and do not mention
+their units.  Here is an example Thing:
+
+	<thing>
+		<name>Rock</name>
+		<mass>3.2</mass>
+		<bulk>0.57</bulk>
+	</thing>
+
+I have no idea if real rocks even exist that are 3.2 kilograms in mass and have
+an approximate bulk of 0.57 cubic meters, but there's one in GridRover now.
+
+3. Fully Featured Things
+
+This section is intended to outline the planned model for Things in future
+versions of GridRover.  Things will have a wide range of attributes:
+
+-- Identification --
+Name
+Short description
+Long description
+Unique numeric identifier
+
+-- Physical traits --
+Mass
+Bulk
+Actual volume
+Density (derived from mass and actual volume)
+Hardness
+HP (all objects can be damaged and/or destroyed)
+Melting point
+
+-- Spectroscopic traits --
+Visible spectrum reflective/specular color
+Fluorescent color under UV light
+Microwave (radar) reflectivity
+IR reflectivity
+Radio absorption rate (does this object interfere with radio communications?)
+Radioactivity (there are several types and intensities)
+Emission spectrum (does this object glow/give off heat? what color?)
+Accoustic characteristics (would sonar reveal this object? does it make noise?)
+
+-- Value --
+Minerological (covers geological and planetary evolution interests)
+Xenobiological (since we are presumably far from Earth)
+Xenoarchaeological (imagine if your rover found evidence of an alien culture!)
+Sophontological (the point values here are liable to be astronomical when >0)
+Economic (gold on the moon)
+Medical (there's a fungus among us)
+Colonization (water, air, soil, and sun, or evidence thereof)
+
+-- Decays --
+Destruct-decay class (if this object is destroyed, what does it become?)
+Radioactive-decay class (if this object is radioactive, what does it turn into?)
+Radioactive-decay time (and after how long?)
+Sample class (if the rover breaks off a piece of this object, what does it get?)
+Sample-decay class (and then what does this object become?)
+Chemical-decay conditions (does this object become something else chemically?)
+Chemical-decay class (if so, what?)
+
+-- Misc --
+Inventory (an object can contain other objects)
+
+So a resulting object might look like this:
+
+	<thing>
+		<id>
+			<name>Icecube</name>
+			<shortdesc>A small cube of water ice</shortdesc>
+			<longdesc>This is a small cube of water ice.  It floats.</longdesc>
+			<tid>283</tid>
+		</id>
+		<physical>
+			<mass>0.9167</mass>
+			<bulk>0.011</bulk>
+			<volume>0.01</volume>
+			<hardness>3.6</hardness>
+			<hp>15</hp>
+			<meltpoint>273.15</meltpoint>
+		</physical>
+		<spectroscopy>
+			<visible>transparent</visible>
+			<fluorescent>none</fluorescent>
+			<uwave>absorb</uwave>
+			<ir>absorb</ir>
+			<radio>transparent</radio>
+			<alpha>absorb</alpha>
+			<beta>absorb</beta>
+			<gamma>transparent</gamma>
+			<sonar>reflective</sonar>
+		</spectroscopy>
+		<value>
+			<minerological>18</minerological>
+			<biological>10</biological>
+			<archaeological>0</archaeological>
+			<sophontological>100</sophontological> <!-- Why is it in cube form?! -->
+			<economic>10</economic>
+			<medical>0</medical>
+			<colonization>100</colonization>
+		</value>
+		<decay>
+			<destruct></destruct>
+			<radioactive></radioactive>
+			<sample>
+				<harvest>284</harvest> <!-- the tid for "ice shard" -->
+				<becomes>283</becomes> <!-- becomes a smaller ice cube -->
+			</sample>
+			<chemical></chemical> <!-- technically, we're leaving out a lot -->
+		</decay>
+		<inventory>
+			<item>243</item> <!-- the tid for "pebble" -->
+		</inventory>
+	</thing>
+
+4. Rover components
+
+Rovers in GridRover are modular.  Or at least they can be.  Each consists of one
+or more rover components connected together.  Each component provides one or
+more functions.  All components can break, and breaking a component means losing
+all of its functions, though it stays part of the rover until removed.
+
+Chassis
+
+Every rover must have a chassis.  It's the core of the rover, and it's the part
+of the rover that you can attach other components to.  It has a number of
+modular attachment points.  Attachment points can be damaged.  You cannot attach
+another chassis to an attachment point.  The chassis has mass and bulk
+limitations.  The entire vehicle cannot exceed these limitations.
+
+Wheels
+
+A rover must have at least three working wheels in order to move.  Any
+component, including the chassis, can provide any number of wheels.  Note that
+the term "Wheel" is used rather loosely.  As component types are intended to be
+generic, you could make "Hover Thrusters" for your rover, and have them capable
+of moving your rover across bodies of water, etc.  Regardless of what kind of
+"Wheel" your rover makes use of, however, it will always need at least three of
+them in order to remain both mobile and stable.
+
+Storage
+
+In order to carry objects, a rover needs a storage compartment of some kind.
+A rover can only have one storage compartment, but any component may provide it.
+A storage compartment has its own bulk limitation (which must be less than its
+own bulk) but does not have its own mass limitation.
+
+Arm
+
+A rover may have any number of manipulator arms, though only one will be of any
+use at a given time.  A rover cannot pick objects up and put them into its
+storage compartment without an arm.  Nor can it deliver objects from its storage
+compartment to the lander without an arm.  Any component may provide a
+manipulator arm.
+
+Sensors
+
+A rover may have any number of sensors, though only one of each type will be of
+any use at a given time.  Your rover must have a functioning visible, uwave, ir,
+or accoustic sensor in order to navigate.  Your rover must have a functioning
+radio sensor in order to communicate by radio with your lander or Earth.  Any
+component may provide any number of types of sensor.  The following types are
+valid:
+
+visible
+uwave
+ir
+uv
+gamma
+accoustic
+radio
+
+Emitters
+
+A rover may have any number of emitters.  It is not yet clear what will happen
+if your rover has more than one emitter of the same type.  Emitters use power
+and can be turned on and off.  Your rover must have a functioning radio emitter
+in order to communicate with your lander or Earth.  If your rover is depending
+upon uwave or accoustic sensors for navigation, it must have a functioning
+emitter of the corresponding type turned on in order to navigate.  The uv
+emitter can cause objects to fluoresce.  The radio and accoustic emitters can
+have side-effects.  Any component may provide any number of types of emitter.
+The following types are valid:
+
+visible
+uwave
+ir
+uv
+accoustic
+radio
+
+Power source
+
+A rover must have a source of power.  The typical power source in GridRover is
+the battery, but the generic term "power source" is used here so that more
+creative ideas can be explored.  Power sources store energy for the rover.  When
+a rover runs completely out of stored energy, it dies.  Any component may
+provide a power source.  The sum of all of a rover's component power sources is
+treated as a single power source for the rover.  When a component is attached to
+the rover, its power capacity is added to the rover's capacity and any energy it
+stores is added to the rover's total energy.  When a component is detached from
+the rover it is automatically drained of as much power as possible before its
+capacity is removed from the rover's, and the rover keeps as much energy as it
+can.
+
+Laser
+
+Rovers don't strictly need lasers.  But what if you want to cut a sample off of
+a rock that would otherwise be too big for the rover to carry?  Also, there's
+really no reason to assume that you are the only space agency sending a rover to
+this particular planet...
+
+As you can see, it's possible to fashion rovers out of a single component that
+provides all the necessary rover facilities, or out of a collection of modular
+components, each of which may be replaced when it becomes damaged or useless.
+Here is a straightforward approach:
+
+	<component>
+		<id>
+			<name>Chassis7</name>
+		</id>
+		<provides>
+			<chassis maxmass=100.0 maxbulk=100.0 modpoints=7 />
+			<wheel number=6 />
+		</provides>
+	</component>
+	<component>
+		<id>
+			<name>PS-110</name>
+		</id>
+		<provides>
+			<powersource capacity=1500 />
+		</provides>
+	</component>
+	<component>
+		<id>
+			<name>Box7</name>
+		</id>
+		<provides>
+			<storage maxbulk=50.0 />
+		</provides>
+	</component>
+	<component>
+		<id>
+			<name>MiniDEX</name>
+		</id>
+		<provides>
+			<arm />
+		</provides>
+	</component>
+	<component>
+		<id>
+			<name>ColorCam20</name>
+		</id>
+		<provides>
+			<sensor type="visible" />
+			<emitter type="visible" />
+		</provides>
+	</component>
+	<component>
+		<id>
+			<name>Radio</name>
+		</id>
+		<provides>
+			<sensor type="radio" />
+			<emitter type="radio" />
+		</provides>
+	</component>
+
+... and so forth.  Notice that there are not enough attachment points (denoted
+by the "modpoints" attribute of the <chassis> tag) to attach all of the
+available components (assuming I had gone on to make a component for each
+sensor/emitter pair).  This could be good -- it would force players to choose
+the components they make their rovers with carefully.  This would add a
+dimension of fun and creativity to the game.  Another way to accomplish this
+might be to assign monetary values to each component and give players a budget
+with which to build their rovers.

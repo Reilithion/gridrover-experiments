@@ -9,9 +9,9 @@
 -- 0.0.1 --
 * Event queue
 * Energy consumption for rover movements
-+ Rover death (from running out of energy)
-+ Small catalog of items to scatter throughout the map
-+ Item creator
+* Rover death (from running out of energy)
+* Small catalog of items to scatter throughout the map
+* Random item placement on map
 
 -- 0.0.2 --
 + Simple sensors and emitters naïve implementation
@@ -59,3 +59,5 @@
 + Multiple rovers controlled by multiple programs or players (Multiplayer)
 + Make objects capable of performing actions of their own accord
 + FireLaser rover command
++ Data file editor GUI (either as a separate app or as part of GridRover)
++ Temperature simulation (maybe rovers can melt)
