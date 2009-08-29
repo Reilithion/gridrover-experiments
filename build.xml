@@ -1,0 +1,50 @@
+<project name="GridRover" default="dist" basedir=".">
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="build" location="_build_" />
+	<property name="dist" location="dist" />
+
+	<target name="init">
+		<!-- Create time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<!-- Compile java code from ${src} -->
+		<javac srcdir="${src}" destdir="${build}" source="1.5" target="1.5" />
+	</target>
+
+	<target name="dist" depends="compile">
+		<!-- Create dist directory -->
+		<mkdir dir="${dist}/lib" />
+		<!-- Create Jar file from contents of ${build} -->
+		<jar jarfile="${dist}/lib/GridRover-${DSTAMP}.jar" manifest="src/Manifest.txt" basedir="${build}" />
+	</target>
+
+	<!-- These targets don't work.  They'll produce a binary, all right, but
+	     that resulting binary suffers an exception that it shouldn't.  Somehow
+	     ant manages to mangle the invocation of gcj just enough to ruin the
+	     native executable. -->
+	<!--
+	<target name="gcj" depends="init">
+		<javac compiler="gcj" srcdir="${src}" destdir="${build}" source="1.5" target="1.5" classpath="">
+			<compilerarg value="-o${build}/gridrover" />
+			<compilerarg value="-<remove-me>-main=gridrover.GridRover" />
+		</javac>
+	</target>
+
+	<target name="native" depends="gcj">
+		<mkdir dir="${dist}/lib" />
+		<copy file="${build}/gridrover" tofile="${dist}/lib/gridrover-${DSTAMP}" />
+		<chmod file="${dist}/lib/GridRover-${DSTAMP}" perm="ugo+rx" />
+	</target>
+	-->
+
+	<target name="clean">
+		<!-- Delete ${build} and ${dist} -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+</project>
