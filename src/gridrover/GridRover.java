@@ -127,28 +127,31 @@ public class GridRover
 		try
 		{
 			Document doc = builder.parse(objectsFile);
-			NodeList itemList = doc.getElementsByTagName("object");
-			int numberOfItems = itemList.getLength();
+			NodeList thingList = doc.getDocumentElement().getChildNodes();
+			int numberOfItems = thingList.getLength();
 			Debug.debug("Number of Items to read from file: " + numberOfItems);
 			for (int i = 0; i < numberOfItems; i++)
 			{
-				String itemName = null;
-				double itemMass = -1.0;
-				double itemBulk = -1.0;
-				Node itemNode = itemList.item(i);
-				NodeList itemPropertyList = itemNode.getChildNodes();
-				for (int j = 0; j < itemPropertyList.getLength(); j++)
+				Node thingNode = thingList.item(i);
+				if (thingNode.getNodeType() == Node.ELEMENT_NODE && ((Element) thingNode).getTagName().equalsIgnoreCase("THING"))
 				{
-					Node propertyNode = itemPropertyList.item(j);
-					if (propertyNode.getNodeName() == "name")
-						itemName = propertyNode.getTextContent();
-					if (propertyNode.getNodeName() == "mass")
-						itemMass = Double.parseDouble(propertyNode.getTextContent());
-					if (propertyNode.getNodeName() == "bulk")
-						itemBulk = Double.parseDouble(propertyNode.getTextContent());
+					String thingName = null;
+					double thingMass = -1.0;
+					double thingBulk = -1.0;
+					NodeList thingPropertyList = thingNode.getChildNodes();
+					for (int j = 0; j < thingPropertyList.getLength(); j++)
+					{
+						Node propertyNode = thingPropertyList.item(j);
+						if (propertyNode.getNodeName().equalsIgnoreCase("NAME"))
+							thingName = propertyNode.getTextContent();
+						if (propertyNode.getNodeName().equalsIgnoreCase("MASS"))
+							thingMass = Double.parseDouble(propertyNode.getTextContent());
+						if (propertyNode.getNodeName().equalsIgnoreCase("BULK"))
+							thingBulk = Double.parseDouble(propertyNode.getTextContent());
+					}
+					Thing thing = new Thing(thingName, thingMass, thingBulk);
+					retVal.add(thing);
 				}
-				Thing item = new Thing(itemName, itemMass, itemBulk);
-				retVal.add(item);
 			}
 		}
 		catch (SAXException e)

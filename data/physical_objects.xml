@@ -1,5 +1,7 @@
-<object>
-	<name>Rock</name>
-	<mass>3.2</mass>
-	<bulk>0.57</bulk>
-</object>
+<objects>
+	<thing>
+		<name>Rock</name>
+		<mass>3.2</mass>
+		<bulk>0.57</bulk>
+	</thing>
+</objects>
