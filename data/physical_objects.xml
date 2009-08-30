@@ -1,7 +1,25 @@
+<!--name = the name of the object -->
+<!--mass = mass of the object in kilograms -->
+<!--bulk = rough volume of the object in cubic meters -->
 <objects>
 	<thing>
 		<name>Rock</name>
 		<mass>3.2</mass>
 		<bulk>0.57</bulk>
+	</thing>
+	<thing>
+		<name>Watermelon</name>
+		<mass>0.5</mass>
+		<bulk>0.33</bulk>
+	</thing>
+	<thing>
+		<name>Gun</name>
+		<mass>0.25</mass>
+		<bulk>0.25</bulk>
+	</thing>
+	<thing>
+		<name>Martian</name>
+		<mass>120</mass>
+		<bulk>1.0</bulk>
 	</thing>
 </objects>
