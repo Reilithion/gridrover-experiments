@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  "Lucas" Adam M. Paul <reilithion@gmail.com>
+    Copyright (C) 2008-2009  "Lucas" Adam M. Paul <reilithion@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import java.text.DateFormat;
 * output debug information, it should do so with this class.
 *
 * @author Lucas Adam M. Paul
-* @version 0.0.0
+* @version 0.0.1
 */
 public class Debug
 {

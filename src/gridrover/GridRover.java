@@ -1,6 +1,6 @@
 /*
     GridRover -- A game to teach programming skills
-    Copyright (C) 2008  "Lucas" Adam M. Paul
+    Copyright (C) 2008-2009  "Lucas" Adam M. Paul
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import javax.xml.parsers.*;
 * Game Engine.  In the future, it will also interpret command line arguments.
 *
 * @author Lucas Adam M. Paul
-* @version 0.0.0
+* @version 0.0.1
 */
 public class GridRover
 {
@@ -50,7 +50,7 @@ public class GridRover
 	*/
 	public static void main (String[] args)
 	{
-		System.out.println("GridRover Copyright (C) 2008  Lucas Adam M. Paul");
+		System.out.println("GridRover Copyright (C) 2008-2009 Lucas Adam M. Paul");
 		System.out.println("This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.TXT.");
 		System.out.println("This is free software, and you are welcome to redistribute it");
 		System.out.println("under certain conditions; see LICENSE.TXT for details.\n");

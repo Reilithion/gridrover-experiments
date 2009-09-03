@@ -1,12 +1,12 @@
 #! /usr/bin/env python
 # encoding: utf-8
 
-# GridRover Copyright (C) 2008  Lucas Adam M. Paul
+# GridRover Copyright (C) 2008-2009  Lucas Adam M. Paul
 # See LICENSE.TXT for full license text
 
 import os, Options
 
-VERSION='0.0.0'
+VERSION='0.0.1'
 APPNAME='GridRover'
 
 srcdir = '.'
