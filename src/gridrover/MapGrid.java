@@ -138,18 +138,21 @@ public class MapGrid
 	*/
 	protected void scatterItemsRandomly(ArrayList<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
-		for (int x=0; x < grid.length; x++)
+		if (!itemPrototypes.isEmpty())
 		{
-			for (int y=0; y < grid[x].length; y++)
+			for (int x=0; x < grid.length; x++)
 			{
-				//TODO: Consolidate randomness
-				if (Math.random() > rItemInSquare)
+				for (int y=0; y < grid[x].length; y++)
 				{
-					int itemsInThisSquare = (int) Math.ceil(Math.random() * maxItemsInSquare);
-					for (int n=0; n < itemsInThisSquare; n++)
+					//TODO: Consolidate randomness
+					if (Math.random() > rItemInSquare)
 					{
-						int itemIndex = (int) Math.floor(Math.random() * itemPrototypes.size());
-						grid[x][y].getInventory().add(new Thing(itemPrototypes.get(itemIndex)));
+						int itemsInThisSquare = (int) Math.ceil(Math.random() * maxItemsInSquare);
+						for (int n=0; n < itemsInThisSquare; n++)
+						{
+							int itemIndex = (int) Math.floor(Math.random() * itemPrototypes.size());
+							grid[x][y].getInventory().add(new Thing(itemPrototypes.get(itemIndex)));
+						}
 					}
 				}
 			}
