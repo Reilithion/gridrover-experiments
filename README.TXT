@@ -2,6 +2,19 @@ GridRover is a game designed to teach programming skills.
 
 -- Building --
 
+There are two supported build systems for GridRover.  Ant and Waf.  In most
+cases, they should produce identical results.  If you have problems with one
+it might pay off to try the other.
+
+To build GridRover, you will need the Java JDK version 5 or greater.
+
+To build GridRover using Ant, you will need Ant.  From the GridRover root
+directory, type "ant" (without the quotes, of course).  Ant should put the
+resulting .jar file in the dist subdirectory.  This section is small not because
+building with ant is necessarily simpler than building with waf, but because
+thorough testing has not been done with ant yet.  A different command might be
+needed under Windows, for instance.
+
 To build GridRover using the included waf tool, you will need Python 2.x
 installed on your system.  Depending on what form of GridRover you want
 and what OS you use, there are a few different ways to build it.
