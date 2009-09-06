@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.File;
+import java.io.InputStream;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 import javax.xml.parsers.*;
@@ -41,7 +41,7 @@ public class GridRover
 	private static final String MAP_HEIGHT = "map_height";
 	private static final String MAX_ELEVATION = "max_elevation";
 	private static final String ELEVATION_PRECISION = "elevation_precision";
-	private static final String DATA_FILE_PATH = "data_file_path";
+	// private static final String DATA_FILE_PATH = "data_file_path";
 
 	/**
 	* This method does the work of getting our application started.
@@ -61,7 +61,7 @@ public class GridRover
 		int length = prefs.getInt(MAP_HEIGHT, 10);
 		double maxElevation = prefs.getDouble(MAX_ELEVATION, 25.0);
 		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
-
+		/*
 		String dataFilePath = prefs.get(DATA_FILE_PATH, null);
 
 		Debug.debug("Data File Path = " + dataFilePath);
@@ -88,7 +88,9 @@ public class GridRover
 		// TODO:  Add a way to reset preferences
 		// TODO:  Store the dataFilePath to our preferences
 		File dataFilePathAbstract = new File(dataFilePath);
-		ArrayList<Thing> itemPrototypes = loadItems(new File(dataFilePathAbstract, "physical_objects.xml"));
+		*/
+		ResourceLocater locater = new ResourceLocater(null);
+		ArrayList<Thing> itemPrototypes = loadItems(locater.getResource("physical_objects.xml"));
 
 		System.out.println("Initializing GridRover...");
 		//GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
@@ -109,7 +111,7 @@ public class GridRover
 	* @param objectsFile The location at which to find the physical_objects.xml file
 	* @return An ArrayList of PhysicalObjects read from the provided file, or an empty ArrayList
 	*/
-	private static ArrayList<Thing> loadItems(File objectsFile)
+	private static ArrayList<Thing> loadItems(InputStream objectsFile)
 	{
 		ArrayList<Thing> retVal = new ArrayList<Thing>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
