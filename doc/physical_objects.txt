@@ -9,8 +9,8 @@ picked up by the Rover and returned to the lander for points to components of
 the Rover, the lander, and even the Rover itself.
 
 Please note that this document is a work in progress and is subject to possibly
-rapid change.  At the time this paragraph was last edited, NONE of the features
-described within this document have actually been implemented in the GridRover
+rapid change.  At the time this paragraph was last edited, only name, mass and
+bulk tags for Things have actually been implemented in the GridRover
 engine.
 
 1. File Structure
@@ -105,6 +105,20 @@ Radioactivity (there are several types and intensities)
 Emission spectrum (does this object glow/give off heat? what color?)
 Accoustic characteristics (would sonar reveal this object? does it make noise?)
 
+A Thing in GridRover has a color, shape, and action for each spectrum.  The
+color and shape must have been specified for that spectrum in spectrum_types.xml
+and the action must be one of reflect, absorb, glow, emit, or transparent.
+Things that reflect are visible to rovers if the square they are in is
+illuminated in that spectrum.  Things that absorb are visible to rovers if the
+square they are in is illuminated in that spectrum, but the color is always
+reported as black.  Things that glow are visible to rovers regardless of whether
+or not the square is illuminated in that spectrum.  Things that glow are always
+visible to rovers and additionally illuminate the square they are in with that
+spectrum.  Things that are transparent are always invisible in that spectrum.
+If a particular spectrum is absent, or if its action is not specified, it is
+assumed to be transparent.  This means that an object that has no spectrum types
+defined is totally invisible to all rovers.
+
 -- Value --
 Minerological (covers geological and planetary evolution interests)
 Xenobiological (since we are presumably far from Earth)
@@ -144,15 +158,29 @@ So a resulting object might look like this:
 			<meltpoint>273.15</meltpoint>
 		</physical>
 		<spectroscopy>
-			<visible>transparent</visible>
-			<fluorescent>none</fluorescent>
-			<uwave>absorb</uwave>
-			<ir>absorb</ir>
-			<radio>transparent</radio>
-			<alpha>absorb</alpha>
-			<beta>absorb</beta>
-			<gamma>transparent</gamma>
-			<sonar>reflective</sonar>
+			<visible>
+				<color>white</color>
+				<shape>square</shape>
+				<action>reflect</action>
+			</visible>
+			<Microwave>
+				<color>dim</color>
+				<shape>brick-wall-shaped</shape>
+				<action>absorb</action>
+			</Microwave>
+			<ir>
+				<color>cold</color>
+				<shape>square</shape>
+				<action>absorb</action>
+			</ir>
+			<!-- using default transparent behavior for all radio waves -->
+			<!-- using default transparent behavior for UV spectrum -->
+			<!-- using default transparent behavior for X-ray spectrum -->
+			<audio>
+				<color>bass</color>
+				<shape>triangle</shape>
+				<action>reflect</action>
+			</audio>
 		</spectroscopy>
 		<value>
 			<minerological>18</minerological>
@@ -188,9 +216,10 @@ Chassis
 
 Every rover must have a chassis.  It's the core of the rover, and it's the part
 of the rover that you can attach other components to.  It has a number of
-modular attachment points.  Attachment points can be damaged.  You cannot attach
-another chassis to an attachment point.  The chassis has mass and bulk
-limitations.  The entire vehicle cannot exceed these limitations.
+modular attachment points.  Attachment points can be damaged.  A rover can have
+only one Chassis, and you cannot attach another chassis to an attachment point.
+The chassis has mass and bulk limitations.  The entire vehicle cannot exceed
+these limitations.  A Chassis cannot provide any other components.
 
 Wheels
 
@@ -267,17 +296,20 @@ the rover it is automatically drained of as much power as possible before its
 capacity is removed from the rover's, and the rover keeps as much energy as it
 can.
 
+Cutting Tool
+
+Rovers don't strictly need cutting tools.  But what if you want to cut a sample
+off of a rock that would otherwise be too big for the rover to carry?
+
 Laser
 
-Rovers don't strictly need lasers.  But what if you want to cut a sample off of
-a rock that would otherwise be too big for the rover to carry?  Also, there's
-really no reason to assume that you are the only space agency sending a rover to
-this particular planet...
+Rovers don't strictly need lasers.  But there's really no reason to assume that
+you are the only space agency sending a rover to this particular planet...
 
-As you can see, it's possible to fashion rovers out of a single component that
-provides all the necessary rover facilities, or out of a collection of modular
-components, each of which may be replaced when it becomes damaged or useless.
-Here is a straightforward approach:
+As you can see, it's possible to fashion rovers out of a chassis and a single
+component that provides all the other necessary rover facilities, or out of a
+collection of modular components, each of which may be replaced when it becomes
+damaged or useless.  Here is a straightforward approach:
 
 	<component>
 		<id>
