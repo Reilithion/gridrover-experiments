@@ -15,6 +15,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import org.apache.commons.digester.*;
+
 /**
  * This is the XML file parser for GridRover.  Using Extractors it will extract desired information from a given xml file.
  */
