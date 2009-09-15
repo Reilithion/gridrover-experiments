@@ -18,6 +18,7 @@
 
 package gridrover;
 
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Calendar;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class GameEngine
 	/**
 	* Scatters random items randomly across the map.
 	*/
-	protected void scatterItemsRandomly(ArrayList<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	protected void scatterItemsRandomly(List<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
 		missionMap.scatterItemsRandomly(itemPrototypes, rItemInSquare, maxItemsInSquare);
 	}

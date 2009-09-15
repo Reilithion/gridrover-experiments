@@ -19,13 +19,7 @@
 package gridrover;
 import java.util.prefs.Preferences;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.io.InputStream;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
+import java.util.List;
 
 /**
 * This class is the main class of the GridRover application.  It initializes the
@@ -89,8 +83,8 @@ public class GridRover
 		// TODO:  Store the dataFilePath to our preferences
 		File dataFilePathAbstract = new File(dataFilePath);
 		*/
-		ResourceLocater locater = new ResourceLocater(null);
-		ArrayList<Thing> itemPrototypes = loadItems(locater.getResource("physical_objects.xml"));
+		XmlFileParser fileParser = new XmlFileParser(new ResourceLocater(null));
+		List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
 
 		System.out.println("Initializing GridRover...");
 		//GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
@@ -102,71 +96,5 @@ public class GridRover
 		System.out.println("Running GridRover...");
 		engine.eventLoop();
 		System.out.println("All events completed.  GridRover now terminating.");
-	}
-
-	/**
-	* This method produces an ArrayList of PhysicalObjects representing each
-	* type of Physical Object read from the file at the specified URL.
-	*
-	* @param objectsFile The location at which to find the physical_objects.xml file
-	* @return An ArrayList of PhysicalObjects read from the provided file, or an empty ArrayList
-	*/
-	private static ArrayList<Thing> loadItems(InputStream objectsFile)
-	{
-		ArrayList<Thing> retVal = new ArrayList<Thing>();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder;
-		try
-		{
-			builder = factory.newDocumentBuilder();
-		}
-		catch (ParserConfigurationException e)
-		{
-			System.out.println("ParserConfigurationException while trying to get a builder.");
-			System.out.println(e.toString());
-			return retVal;
-		}
-		try
-		{
-			Document doc = builder.parse(objectsFile);
-			NodeList thingList = doc.getDocumentElement().getChildNodes();
-			int numberOfItems = thingList.getLength();
-			Debug.debug("Number of Items to read from file: " + numberOfItems);
-			for (int i = 0; i < numberOfItems; i++)
-			{
-				Node thingNode = thingList.item(i);
-				if (thingNode.getNodeType() == Node.ELEMENT_NODE && ((Element) thingNode).getTagName().equalsIgnoreCase("THING"))
-				{
-					String thingName = null;
-					double thingMass = -1.0;
-					double thingBulk = -1.0;
-					NodeList thingPropertyList = thingNode.getChildNodes();
-					for (int j = 0; j < thingPropertyList.getLength(); j++)
-					{
-						Node propertyNode = thingPropertyList.item(j);
-						if (propertyNode.getNodeName().equalsIgnoreCase("NAME"))
-							thingName = propertyNode.getTextContent();
-						if (propertyNode.getNodeName().equalsIgnoreCase("MASS"))
-							thingMass = Double.parseDouble(propertyNode.getTextContent());
-						if (propertyNode.getNodeName().equalsIgnoreCase("BULK"))
-							thingBulk = Double.parseDouble(propertyNode.getTextContent());
-					}
-					Thing thing = new Thing(thingName, thingMass, thingBulk);
-					retVal.add(thing);
-				}
-			}
-		}
-		catch (SAXException e)
-		{
-			System.out.println("SAXException while trying to parse xml.");
-			System.out.println(e.toString());
-		}
-		catch (IOException e)
-		{
-			System.out.println("IOException while trying to parse xml.");
-			System.out.println("Tried to open: " + objectsFile.toString());
-			System.out.println(e.toString());
-		}
-		return retVal;
 	}
 }
