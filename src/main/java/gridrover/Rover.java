@@ -28,7 +28,7 @@ package gridrover;
 */
 public class Rover extends Thing
 {
-	private double energy, maxEnergy;
+	private double energy;
 	private MapSquare location;
 	private RoverControlInterface controlInterface;
 
@@ -46,7 +46,7 @@ public class Rover extends Thing
 	protected Rover(String name, double mass, double bulk, double maxEnergy, RoverControlInterface controlInterface)
 	{
 		super(name, mass, bulk);
-		this.energy = this.maxEnergy = maxEnergy;
+		this.energy = maxEnergy;
 		this.controlInterface = controlInterface;
 	}
 

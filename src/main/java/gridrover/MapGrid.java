@@ -17,7 +17,6 @@
 */
 
 package gridrover;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,26 +78,6 @@ public class MapGrid
 	}
 
 	/**
-	* Get the width of the map
-	*
-	* @return East-West width of the map
-	*/
-	private int getWidth()
-	{
-		return grid.length;
-	}
-
-	/**
-	* Get the Length of the map.
-	*
-	* @return North-South length of the map
-	*/
-	private int getLength()
-	{
-		return grid[0].length;
-	}
-
-	/**
 	* Fill the map with blank squares
 	*/
 	private void fillWithBlank()
@@ -130,11 +109,11 @@ public class MapGrid
 	}
 
 	/**
-	* Scatter random items from the given ArrayList of item prototypes across the
+	* Scatter random items from the given List of item prototypes across the
 	* map.
 	*
-	* @param itemPrototypes An ArrayList containing item types to be scattered
-	* @param rItemInSquare The liklihood that any given square will contain any number of items
+	* @param itemPrototypes A List containing item types to be scattered
+	* @param rItemInSquare The likelihood that any given square will contain any number of items
 	* @param maxItemsInSquare The greatest number of items any square may contain
 	*/
 	protected void scatterItemsRandomly(List<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)

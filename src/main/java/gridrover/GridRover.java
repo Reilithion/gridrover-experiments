@@ -18,7 +18,6 @@
 
 package gridrover;
 import java.util.prefs.Preferences;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +34,6 @@ public class GridRover
 	private static final String MAP_HEIGHT = "map_height";
 	private static final String MAX_ELEVATION = "max_elevation";
 	private static final String ELEVATION_PRECISION = "elevation_precision";
-	// private static final String DATA_FILE_PATH = "data_file_path";
 
 	/**
 	* This method does the work of getting our application started.
@@ -55,39 +53,11 @@ public class GridRover
 		int length = prefs.getInt(MAP_HEIGHT, 10);
 		double maxElevation = prefs.getDouble(MAX_ELEVATION, 25.0);
 		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
-		/*
-		String dataFilePath = prefs.get(DATA_FILE_PATH, null);
 
-		Debug.debug("Data File Path = " + dataFilePath);
-
-		System.out.println("Loading data files...");
-		//TODO: Try the classloader first.  Save the user some mess.
-		while (dataFilePath == null)
-		{
-			System.out.println("No data file path found.  Please type the path to the data files.");
-			System.out.print(">");
-			//TODO: Consolidate console user input code
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			try
-			{
-				dataFilePath = reader.readLine();
-			}
-			catch (IOException ioe)
-			{
-				System.err.println("IO error trying to read from System.in");
-				System.exit(1);
-			}
-		}
-		// Not storing the dataFilePath to its prefs entry until we have a way to reset it.
-		// TODO:  Add a way to reset preferences
-		// TODO:  Store the dataFilePath to our preferences
-		File dataFilePathAbstract = new File(dataFilePath);
-		*/
 		XmlFileParser fileParser = new XmlFileParser(new ResourceLocater(null));
 		List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
 
 		System.out.println("Initializing GridRover...");
-		//GameEngine engine = new GameEngine(new CommandlineRoverControl(), width, length, maxElevation, precision);
 		GameEngine engine = new GameEngine(width, length, maxElevation, precision);
 		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, new CommandlineRoverControl()); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		engine.addRover(rover, width/2, length/2); // Add a single rover in the middle of the map

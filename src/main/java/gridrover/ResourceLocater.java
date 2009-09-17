@@ -129,6 +129,9 @@ public class ResourceLocater
 		return resource;
 	}
 
+	// TODO:  Add a way to reset preferences
+	// TODO:  Store the dataFilePath to our preferences
+
 	/**
 	* Attempt to get a resource from the location specified in GridRover's
 	* Preferences.  This method will try to locate the named resource in

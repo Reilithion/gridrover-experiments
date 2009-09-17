@@ -21,7 +21,6 @@ package gridrover;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Calendar;
-import java.util.ArrayList;
 
 /**
 * This is the game engine.  It initializes a map, a rover, and a lander.
@@ -33,31 +32,8 @@ import java.util.ArrayList;
 */
 public class GameEngine
 {
-	//private RoverControlInterface controlInterface;
 	private MapGrid missionMap;
-	//private Rover rover;
-	//private Lander lander; // Not yet used
 	private PriorityQueue<Event> eventQueue;
-
-	/**
-	* Makes a new game, with specified control interface, and blank map dimensions.
-	*
-	* @param controlInterface The interface with which the user, or program, will control the rover
-	* @param width Desired width of the blank map, in squares
-	* @param length Desired length of the blank map, in squares
-	*/
-	/*private GameEngine(RoverControlInterface controlInterface, int width, int length)
-	{
-		this.controlInterface = controlInterface;
-		missionMap = new MapGrid(width, length);
-		MapSquare startsquare = missionMap.getSquare(width/2, length/2);
-		if (startsquare == null)
-		{
-			throw new Error("Something funky happened!  Really funky!");
-		}
-		new Lander("Lander", 348.0, 11.236, startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
-		rover = new Rover("Rover", 185.0, 5.52, startsquare); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
-	}/*
 
 	/**
 	* Makes a new game, with specified control interface, and randomly-generated map dimensions.
@@ -72,14 +48,12 @@ public class GameEngine
 	*/
 	protected GameEngine(RoverControlInterface controlInterface, int width, int length, double maxElevation, int precision)
 	{
-		//this.controlInterface = controlInterface;
 		missionMap = new MapGrid(width, length, maxElevation, precision);
 		MapSquare startsquare = missionMap.getSquare(width/2, length/2);
 		if (startsquare == null)
 		{
 			throw new Error("Something funky happened!  Really funky!");
 		}
-		/*lander = */
 		new Lander("Lander", 348.0, 11.236).setLocation(startsquare); // Mass 348.0 kg, 2.65 meters diameter by 1.6 meters tall
 		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, controlInterface); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		rover.setLocation(startsquare);
@@ -142,62 +116,4 @@ public class GameEngine
 			eventQueue.poll().apply();
 		}
 	}
-
-	/**
-	* This is the main game loop.  Command evaluation takes place here.
-	*/
-	/*protected void roverLoop()
-	{
-		boolean running = true;
-		Command command;
-		while (running)
-		{
-			command = controlInterface.getNextCommand();
-			switch (command.getCommandWord())
-			{
-			case QUIT:
-				running = false;
-				break;
-			case GO:
-				go(command);
-				break;
-			case LOOK:
-				look();
-				break;
-			case WAIT:
-				break;
-			default:
-				controlInterface.commandUnknown(command);
-			}
-		}
-	}*/
-
-	/**
-	* Executes the look command
-	*/
-	/*private void look()
-	{
-		MapSquare location = rover.getLocation();
-		controlInterface.describeLocation(location);
-	}*/
-
-	/**
-	* Executes the go command
-	*
-	* @param command The command and all its arguments
-	*/
-	/*private void go(Command command)
-	{
-		if (command.getArgs().length < 1)
-		{
-			Debug.debug("Argument length of less than 1.  Expected a direction.");
-			controlInterface.commandFailed(command);
-			return;
-		}
-		Debug.debug("Attempting to go " + command.getArgs()[0]);
-		if (rover.go(command.getArgs()[0]))
-			controlInterface.commandSucceeded(command);
-		else
-			controlInterface.commandFailed(command);
-	}*/
 }

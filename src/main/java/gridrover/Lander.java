@@ -42,16 +42,6 @@ public class Lander extends Thing
 	}
 
 	/**
-	* Return the MapSquare where the Lander is.
-	*
-	* @return Lander's location
-	*/
-	private MapSquare getLocation()
-	{
-		return location;
-	}
-
-	/**
 	* Sets the Lander's location on the map grid.
 	*
 	* @param location The Lander's location on the MapGrid
