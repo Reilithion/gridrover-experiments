@@ -2,8 +2,7 @@
 <!-- color = valid colors in this spectrum -->
 <!-- shape = valid shapes in this spectrum -->
 <spectra>
-	<spectrum>
-		<name>Visible</name>
+	<spectrum name="Visible">
 		<color>red</color>
 		<color>orange</color>
 		<color>yellow</color>
@@ -23,8 +22,7 @@
 		<shape>symmetrical</shape>
 		<shape>rover-shaped</shape>
 	</spectrum>
-	<spectrum>
-		<name>Infrared</name>
+	<spectrum name="Infrared">
 		<color>hot</color>
 		<color>warm</color>
 		<color>tepid</color>
@@ -38,8 +36,7 @@
 		<shape>symmetrical</shape>
 		<shape>rover-shaped</shape>
 	</spectrum>
-	<spectrum>
-		<name>Ultraviolet</name>
+	<spectrum name="Ultraviolet">
 		<color>mild</color>
 		<color>ow</color>
 		<color>ouch</color>
@@ -52,8 +49,7 @@
 		<shape>symmetrical</shape>
 		<shape>rover-shaped</shape>
 	</spectrum>
-	<spectrum>
-		<name>Microwave</name>
+	<spectrum name="Microwave">
 		<color>bright</color>
 		<color>not-so-bright</color>
 		<color>dim</color>
@@ -63,8 +59,7 @@
 		<shape>ww2-airplane-shaped</shape>
 		<shape>brick-wall-shaped</shape>
 	</spectrum>
-	<spectrum>
-		<name>Radio</name>
+	<spectrum name="Radio">
 		<color>NASA-frequency</color>
 		<color>Russian-frequency</color>
 		<color>EUSA-frequency</color>
@@ -75,8 +70,7 @@
 		<shape>video</shape>
 		<shape>data</shape>
 	</spectrum>
-	<spectrum>
-		<name>X-ray</name>
+	<spectrum name="X-ray">
 		<color>blurp</color>
 		<color>gleep</color>
 		<color>hurk</color>
@@ -88,8 +82,7 @@
 		<shape>symmetrical</shape>
 		<shape>rover-shaped</shape>
 	</spectrum>
-	<spectrum>
-		<name>Audio</name>
+	<spectrum name="Audio">
 		<color>bass</color>
 		<color>treble</color>
 		<color>soprano</color>

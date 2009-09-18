@@ -35,8 +35,8 @@ public class XmlFileParser {
         return loadItems(setupDocument(xmlFileName));
     }
     
-    public List<Spectrum> getSpectrum(String xmlFileName) {
-        return loadSpectrum(setupDocument(xmlFileName));
+    public List<Spectrum> getSpectra(String xmlFileName) {
+        return loadSpectra(resourceLocater.getResource(xmlFileName));
     }
     
     private Document setupDocument(String xmlFileName) {
@@ -99,7 +99,30 @@ public class XmlFileParser {
         return retVal;
      }
      
-     private List<Spectrum> loadSpectrum(Document doc) {
-         return new ArrayList<Spectrum>();
+     private List<Spectrum> loadSpectra(InputStream input) {
+         ArrayList<SpectrumBean> spectrumBeans = null;
+         Digester digester = new Digester();
+         digester.setValidating(false);
+         digester.addObjectCreate("spectra", "java.util.ArrayList");
+         digester.addObjectCreate("spectra/spectrum", "gridrover.SpectrumBean");
+         digester.addSetProperties("spectra/spectrum");
+         digester.addCallMethod("spectra/spectrum/color", "addColor", 0);
+         digester.addCallMethod("spectra/spectrum/shape", "addShape", 0);
+         digester.addSetNext("spectra/spectrum", "add", "gridrover.SpectrumBean");
+         try
+         {
+         	spectrumBeans = (ArrayList<SpectrumBean>) digester.parse(input);
+         }
+         catch (Exception e)
+         {
+         	Debug.debug(e.toString());
+         	return null;
+         }
+         ArrayList<Spectrum> spectra = new ArrayList<Spectrum>();
+         for (SpectrumBean sb : spectrumBeans)
+         {
+         	spectra.add(new Spectrum(sb));
+         }
+         return spectra;
      }
 }

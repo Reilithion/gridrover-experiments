@@ -1,5 +1,7 @@
 package gridrover;
 
+import java.util.List;
+
 /**
  * This is a Spectrum in the GridRover world.  
  * It defines a spectrum available to sensors to pick up or emitters to emit.
@@ -9,8 +11,8 @@ package gridrover;
  */
 public class Spectrum {
 	private String name;
-	private String color;
-	private String shape;
+	private List<String> colors;
+	private List<String> shapes;
 
 	/**
 	 * Makes a new SpectrumType called the given name.
@@ -19,21 +21,21 @@ public class Spectrum {
 	 * @param color The color of the Spectrum
 	 * @param shape the shape of the Spectrum
 	 */
-	public Spectrum(String name, String color, String shape) {
-		this.name = name;
-		this.color = color;
-		this.shape = shape;
+	public Spectrum(SpectrumBean sb) {
+		this.name = sb.getName();
+		this.colors = sb.getColors();
+		this.shapes = sb.getShapes();
 	}
 
 	public String getName() {
 		return name;
 	}
 	
-	public String getColor() {
-	    return color;
+	public List<String> getColors() {
+	    return colors;
 	}
 	
-	public String getShape() {
-	    return shape;
+	public List<String> getShapes() {
+	    return shapes;
 	}
 }

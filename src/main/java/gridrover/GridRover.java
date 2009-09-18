@@ -55,6 +55,18 @@ public class GridRover
 		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
 
 		XmlFileParser fileParser = new XmlFileParser(new ResourceLocater(null));
+		List<Spectrum> spectra = fileParser.getSpectra("spectrum_types.xml");
+		Debug.debug("Checking we got our spectra.");
+		for (Spectrum spec : spectra)
+		{
+			Debug.debug("Type: " + spec.getName());
+			List<String> list = spec.getColors();
+			for (String color : list)
+				Debug.debug("\tColor: " + color);
+			list = spec.getShapes();
+			for (String shape : list)
+				Debug.debug("\tShape: " + shape);
+		}
 		List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
 
 		System.out.println("Initializing GridRover...");
