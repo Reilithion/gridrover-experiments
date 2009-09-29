@@ -58,11 +58,27 @@ somewhere on your system where waf can find it and try a command like
 "python waf configure --native".  If waf complains, it's probably because
 it can't find gcj, or possibly your JDK.
 
+-- Running --
+
+In order to run GridRover, Java must be able to find the Apache Commons Digester
+(and its dependencies) in your classpath.  This may make it tricky to run
+GridRover from, say, the commandline.  This is one way known to work on
+GNU/Linux:
+
+java -classpath .:*:/usr/share/java/* gridrover.GridRover
+
+This assumes that the Apache Commons Digester and its dependencies are all
+found in /usr/share/java/ and that GridRover.jar is in the current directory.
+Figuring out how to start up GridRover on your own system should be a matter of
+replacing my directory structure with yours.
+
 -- Credits --
 
 GridRover was written by "Lucas" Adam M. Paul <reilithion@gmail.com>
-Much help was generously contributed by Ackypi,
-and Commissioner.moo <commissioner.moo@gmail.com>.
+Much help was generously contributed by:
+- Ackypi
+- Commissioner.moo <commissioner.moo@gmail.com>
+- Karasu <kino.ichigo@gmail.com> (contributed to the data files; Thanks!)
 
 Special thanks are due to the University of Utah ( http://www.utah.edu ) for
 the original idea of a rover simulator and making a program to be a player.

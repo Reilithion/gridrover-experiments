@@ -2,24 +2,81 @@
 <!--mass = mass of the object in kilograms -->
 <!--bulk = rough volume of the object in cubic meters -->
 <objects>
-	<thing>
-		<name>Rock</name>
-		<mass>3.2</mass>
-		<bulk>0.57</bulk>
+	<thing name="Rock" minMass="3.0" maxMass="3.5" minDensity="2.5" maxDensity="2.8">
+		<spectroscopy>
+			<appearance stimulus="Visible">
+				<response spectrum="Visible" color="gray" shape="irregular" action="reflect" />
+			</appearance>
+			<appearance stimulus="Ultraviolet">
+				<response spectrum="Visible" color="blue" shape="irregular" action="glow" />
+			</appearance>
+			<appearance stimulus="Infrared">
+				<response spectrum="Infrared" color="warm" shape="irregular" action="glow" />
+			<!-- Perhaps adding an 'or' would help, for night/day -->
+			</appearance>
+		</spectroscopy>
 	</thing>
-	<thing>
-		<name>Watermelon</name>
-		<mass>0.5</mass>
-		<bulk>0.33</bulk>
+	<thing name="Watermelon" minMass="0.3" maxMass="0.8" minDensity="0.9" maxDensity="0.95">
+		<spectroscopy>
+			<appearance stimulus="Visible">
+				<response spectrum="Visible" color="green" shape="round" action="reflect" />
+			</appearance>
+			<appearance stimulus="Ultraviolet">
+				<response spectrum="Ultraviolet" color="mild" shape="round" action="glow" />
+			</appearance>
+			<appearance stimulus="Microwave">
+				<response spectrum="Microwave" color="dim" shape="round" action="absorb" />
+			</appearance>
+			<appearance stimulus="X-ray">
+				<response spectrum="X-ray" color="translucent" shape="round" action="transparent" />
+			</appearance>
+			<appearance stimulus="Audio">
+				<response spectrum="Audio" color="bass" shape="round" action="reflect" />
+			</appearance>
+		</spectroscopy>
 	</thing>
-	<thing>
-		<name>Gun</name>
-		<mass>0.25</mass>
-		<bulk>0.25</bulk>
+	<thing name="Gun" minMass="0.25" minDensity="2.2">
+		<spectroscopy>
+			<appearance stimulus="Visible">
+				<response spectrum="Visible" color="black" shape="long" action="reflect" />
+			</appearance>
+			<appearance stimulus="Infrared">
+				<response spectrum="Infrared" calor="cool" shape="long" action="reflect" />
+			</appearance>
+			<appearance stimulus="Ultraviolet">
+				<response spectrum="Ultraviolet" color="mild" shape="long" action="glow" />
+			</appearance>
+			<appearance stimulus="Microwave">
+				<response spectrum="Microwave" color="bright" shape="long" action="reflect" />
+			</appearance>
+			<appearance stimulus="X-ray">
+				<respnose spectrum="X-ray" color="solid" shape="long" action="absorb" />
+			</appearance>
+			<appearance stimulus="Audio">
+				<response spectrum="audio" color="treble" shape="square" action="reflect" />
+			</appearance>
+		</spectroscopy>
 	</thing>
-	<thing>
-		<name>Martian</name>
-		<mass>120</mass>
-		<bulk>1.0</bulk>
+	<thing name="Martian" minMass="120.0" maxMass="125.0" minDensity="0.9196" maxDensity="1.06">
+		<spectroscopy>
+			<appearance stimulus="">
+				<response spectrum="Visible" color="green" shape="symmetrical" action="glow" />
+			</appearance>
+			<appearance stimulus="Visible">
+				<response spectrum="Visible" color="green" shape="symmetrical" action="reflect" />
+			</appearance>
+			<appearance stimulus="Infrared">
+				<response spectrum="Infrared" color="warm" shape="symmetrical" action="emit" />
+			</appearance>
+			<appearance stimulus="Ultraviolet">
+				<response spectrum="Ultraviolet" color="mild" shape="symmetrical" action="reflect" />
+			</appearance>
+			<appearance stimulus="Microwave">
+				<response spectrum="Microwave" color="dim" shape="symmetrical" action="absorb" />
+			</appearance>
+			<appearance stimulus="X-ray">
+				<response spectrum="X-ray" color="translucent" shape="symmetrical" action="reflect" />
+			</appearance>
+		</spectroscopy>
 	</thing>
 </objects>

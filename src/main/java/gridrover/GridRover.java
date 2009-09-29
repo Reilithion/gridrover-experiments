@@ -54,6 +54,8 @@ public class GridRover
 		double maxElevation = prefs.getDouble(MAX_ELEVATION, 25.0);
 		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
 
+		System.out.println("Loading data files...");
+
 		XmlFileParser fileParser = new XmlFileParser(new ResourceLocater(null));
 		List<Spectrum> spectra = fileParser.getSpectra("spectrum_types.xml");
 		Debug.debug("Checking we got our spectra.");
@@ -67,13 +69,31 @@ public class GridRover
 			for (String shape : list)
 				Debug.debug("\tShape: " + shape);
 		}
-		List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
+		//List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
+		List<ThingBean> itemPrototypes = fileParser.getThings("physical_objects.xml", spectra);
+		Debug.debug("Checking we got our Things.");
+		for (ThingBean tb : itemPrototypes)
+		{
+			Debug.debug("Name: " + tb.getName());
+			Debug.debug("Mass: " + tb.getMinMass() + " - " + tb.getMaxMass());
+			Debug.debug("Density: " + tb.getMinDensity() + " - " + tb.getMaxDensity());
+			List<AppearanceBean> appearance = tb.getAppearanceBeans();
+			for (AppearanceBean ab : appearance)
+			{
+				Debug.debug("Under the " + ab.getStimulus() + " spectrum, " + tb.getName() + " reacts with:");
+				List<ResponseBean> responses = ab.getResponseBeans();
+				for (ResponseBean rb : responses)
+				{
+					Debug.debug(rb.getSpectrumAction().toString() + " " + rb.getColor() + " " + rb.getShape() + " in spectrum " + rb.getSpectrum());
+				}
+			}
+		}
 
 		System.out.println("Initializing GridRover...");
 		GameEngine engine = new GameEngine(width, length, maxElevation, precision);
 		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, new CommandlineRoverControl()); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		engine.addRover(rover, width/2, length/2); // Add a single rover in the middle of the map
-		engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
+		//engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
 
 		System.out.println("Running GridRover...");
 		engine.eventLoop();

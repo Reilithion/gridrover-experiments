@@ -74,6 +74,9 @@
 		<color>blurp</color>
 		<color>gleep</color>
 		<color>hurk</color>
+		<color>invisible</color>
+		<color>translucent</color>
+		<color>solid</color>
 		<shape>square</shape>
 		<shape>round</shape>
 		<shape>long</shape>

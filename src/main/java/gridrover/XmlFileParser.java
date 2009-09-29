@@ -34,6 +34,10 @@ public class XmlFileParser {
     public List<Thing> getThings(String xmlFileName) {
         return loadItems(setupDocument(xmlFileName));
     }
+
+	public List<ThingBean> getThings(String xmlFileName, List<Spectrum> spectra) {
+		return loadThings(resourceLocater.getResource(xmlFileName), spectra);
+	}
     
     public List<Spectrum> getSpectra(String xmlFileName) {
         return loadSpectra(resourceLocater.getResource(xmlFileName));
@@ -98,7 +102,34 @@ public class XmlFileParser {
         }
         return retVal;
      }
-     
+
+     private List<ThingBean> loadThings(InputStream input, List<Spectrum> spectra) {
+     	List<ThingBean> thingBeans = null;
+     	Digester digester = new Digester();
+     	digester.setValidating(false);
+     	digester.addObjectCreate("objects", "java.util.ArrayList");
+     	digester.addObjectCreate("objects/thing", "gridrover.ThingBean");
+     	digester.addSetProperties("objects/thing");
+     	digester.addObjectCreate("objects/thing/spectroscopy/appearance", "gridrover.AppearanceBean");
+     	digester.addSetProperties("objects/thing/spectroscopy/appearance");
+     	digester.addObjectCreate("objects/thing/spectroscopy/appearance/response", "gridrover.ResponseBean");
+     	digester.addSetProperties("objects/thing/spectroscopy/appearance/response");
+     	digester.addSetNext("objects/thing/spectroscopy/appearance/response", "addResponseBean", "gridrover.ResponseBean");
+     	digester.addSetNext("objects/thing/spectroscopy/appearance", "addAppearanceBean", "gridrover.AppearanceBean");
+     	digester.addSetNext("objects/thing", "add", "gridrover.ThingBean");
+     	try
+     	{
+     		thingBeans = (List<ThingBean>) digester.parse(input);
+     		input.close();
+     	}
+     	catch (Exception e)
+     	{
+     		Debug.debug(e.toString());
+     		return null;
+     	}
+     	return thingBeans;
+     }
+
      private List<Spectrum> loadSpectra(InputStream input) {
          ArrayList<SpectrumBean> spectrumBeans = null;
          Digester digester = new Digester();
@@ -112,6 +143,7 @@ public class XmlFileParser {
          try
          {
          	spectrumBeans = (ArrayList<SpectrumBean>) digester.parse(input);
+         	input.close();
          }
          catch (Exception e)
          {
