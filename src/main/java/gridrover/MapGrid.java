@@ -116,7 +116,7 @@ public class MapGrid
 	* @param rItemInSquare The likelihood that any given square will contain any number of items
 	* @param maxItemsInSquare The greatest number of items any square may contain
 	*/
-	protected void scatterItemsRandomly(List<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	protected void scatterItemsRandomly(List<ThingBean> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
 		if (!itemPrototypes.isEmpty())
 		{

@@ -93,7 +93,7 @@ public class GridRover
 		GameEngine engine = new GameEngine(width, length, maxElevation, precision);
 		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, new CommandlineRoverControl()); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		engine.addRover(rover, width/2, length/2); // Add a single rover in the middle of the map
-		//engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
+		engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
 
 		System.out.println("Running GridRover...");
 		engine.eventLoop();

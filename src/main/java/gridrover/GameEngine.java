@@ -101,7 +101,7 @@ public class GameEngine
 	/**
 	* Scatters random items randomly across the map.
 	*/
-	protected void scatterItemsRandomly(List<Thing> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
+	protected void scatterItemsRandomly(List<ThingBean> itemPrototypes, double rItemInSquare, int maxItemsInSquare)
 	{
 		missionMap.scatterItemsRandomly(itemPrototypes, rItemInSquare, maxItemsInSquare);
 	}

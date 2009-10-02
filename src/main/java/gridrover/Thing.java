@@ -18,6 +18,9 @@
 
 package gridrover;
 
+import java.util.List;
+import java.util.Iterator;
+
 /**
 * This is an item in the GridRover world.  Currently inert, Things can be
 * picked up and carried around.
@@ -27,8 +30,11 @@ package gridrover;
 */
 public class Thing
 {
+	private static int idCounter = 0;
 	private String name;
+	private int id;
 	private double mass, bulk;
+	private List<AppearanceBean> totalAppearance;
 
 	/**
 	* Makes a new Thing with specified name, mass, and bulk
@@ -57,6 +63,26 @@ public class Thing
 	}
 
 	/**
+	* Makes a new Thing out of the supplied ThingBean prototype.
+	*
+	* @param prototype A ThingBean prototype to instantiate
+	*/
+	protected Thing(ThingBean prototype)
+	{
+		this.name = prototype.getName();
+		this.id = idCounter++;
+		this.mass = Math.random() * (prototype.getMaxMass() - prototype.getMinMass()) + prototype.getMinMass();
+		/*
+		* m = mass, v = volume, d = density
+		* d = m / v
+		*  m
+		* v d
+		*/
+		this.bulk = this.mass / (Math.random() * (prototype.getMaxDensity() - prototype.getMinDensity()) + prototype.getMinDensity());
+		this.totalAppearance = prototype.getAppearanceBeans();
+	}
+
+	/**
 	* Returns the name of the Thing
 	*
 	* @return Thing's name
@@ -64,6 +90,16 @@ public class Thing
 	public String getName()
 	{
 		return name;
+	}
+
+	/**
+	* Returns the unique ID of this Thing
+	*
+	* @return Thing's ID
+	*/
+	public int getID()
+	{
+		return id;
 	}
 
 	/**
@@ -84,5 +120,15 @@ public class Thing
 	public double getBulk()
 	{
 		return bulk;
+	}
+
+	/**
+	* Returns this Thing's appearance
+	*
+	* @return an Iterator over all of the aspects of this Thing's appearance
+	*/
+	public Iterator<AppearanceBean> getAppearance()
+	{
+		return (Iterator<AppearanceBean>) totalAppearance;
 	}
 }
