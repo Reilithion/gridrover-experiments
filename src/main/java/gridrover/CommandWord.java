@@ -57,8 +57,8 @@ public enum CommandWord
 		{
 			Calendar eventStartTime = (Calendar) startTime.clone();
 			eventStartTime.add(Calendar.MILLISECOND, 50);
-			rover.getControlInterface().describeLocation(rover.getLocation());
-			eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
+			//rover.getControlInterface().describeLocation(rover.getLocation());
+			eventQueue.add(new LookEvent(eventStartTime, eventQueue, rover, command));
 		}
 	},
 

@@ -108,6 +108,18 @@ public class MapGrid
 		}
 	}
 
+	protected void addAmbientLighting(Spectrum spec)
+	{
+		for (int x=0; x < grid.length; x++)
+		{
+			for (int y=0; y < grid[x].length; y++)
+			{
+				if (grid[x][y] != null)
+					grid[x][y].addAmbientLighting(spec);
+			}
+		}
+	}
+
 	/**
 	* Scatter random items from the given List of item prototypes across the
 	* map.

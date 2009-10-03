@@ -19,6 +19,7 @@
 package gridrover;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * A MapSquare represents a location on the MapGrid that the rover can occupy.
@@ -32,7 +33,8 @@ import java.util.ArrayList;
 public class MapSquare
 {
 	private double elevation;
-	private ArrayList<Thing> inventory;
+	private List<Spectrum> ambientLighting;
+	private List<Thing> inventory;
 	private MapGrid locale;
 
 	/**
@@ -47,6 +49,7 @@ public class MapSquare
 	{
 		this.locale = locale;
 		this.elevation = 0.0;
+		ambientLighting = new ArrayList<Spectrum>();
 		inventory = new ArrayList<Thing>();
 	}
 
@@ -62,6 +65,7 @@ public class MapSquare
 	{
 		this.locale = locale;
 		this.elevation = elevation;
+		ambientLighting = new ArrayList<Spectrum>();
 		inventory = new ArrayList<Thing>();
 	}
 
@@ -84,7 +88,7 @@ public class MapSquare
 	* @return An ArrayList of PhysicalObjects, representing the contents
 	* of this MapSquare
 	*/
-	protected ArrayList<Thing> getInventory()
+	protected List<Thing> getInventory()
 	{
 		return inventory;
 	}
@@ -101,5 +105,16 @@ public class MapSquare
 	protected MapSquare getSquareDirFrom(String direction)
 	{
 		return locale.getSquareDirFrom(direction, this);
+	}
+
+	protected void addAmbientLighting(Spectrum spec)
+	{
+		ambientLighting.add(spec);
+	}
+
+	protected List<Spectrum> getLighting()
+	{
+		//TODO: check our inventory for Spectrum emitters and add them to our result
+		return ambientLighting;
 	}
 }

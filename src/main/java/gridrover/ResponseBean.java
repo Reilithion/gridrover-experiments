@@ -76,4 +76,20 @@ public class ResponseBean
 	{
 		return action.toString();
 	}
+
+	@Override public boolean equals(Object aThat)
+	{
+		if (this == aThat) return true;
+		if (!(aThat instanceof ResponseBean)) return false;
+		ResponseBean that = (ResponseBean) aThat;
+		return this.spectrum.equals(that.spectrum) &&
+		       this.color.equals(that.color) &&
+		       this.shape.equals(that.shape) &&
+		       this.action.equals(that.action);
+	}
+
+	@Override public int hashCode()
+	{
+		return (spectrum + color + shape + action.toString()).hashCode();
+	}
 }

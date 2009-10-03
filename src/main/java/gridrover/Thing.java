@@ -19,7 +19,6 @@
 package gridrover;
 
 import java.util.List;
-import java.util.Iterator;
 
 /**
 * This is an item in the GridRover world.  Currently inert, Things can be
@@ -127,8 +126,8 @@ public class Thing
 	*
 	* @return an Iterator over all of the aspects of this Thing's appearance
 	*/
-	public Iterator<AppearanceBean> getAppearance()
+	public List<AppearanceBean> getAppearance()
 	{
-		return (Iterator<AppearanceBean>) totalAppearance;
+		return totalAppearance;
 	}
 }

@@ -18,6 +18,8 @@
 
 package gridrover;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 /**
 * A RoverControlInterface must provide all that is required for a user
@@ -72,6 +74,10 @@ public interface RoverControlInterface
 	* @param location The MapSquare on which to provide information
 	*/
 	public void describeLocation(MapSquare location);
+
+	public void describeLighting(List<Spectrum> lighting);
+
+	public void describeObjectAppearance(Set<ResponseBean> responses);
 
 	/**
 	* This method should provide information about a Rover's status.

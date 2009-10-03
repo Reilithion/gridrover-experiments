@@ -38,4 +38,19 @@ public class Spectrum {
 	public List<String> getShapes() {
 	    return shapes;
 	}
+
+	@Override public boolean equals(Object aThat)
+	{
+		if (this == aThat)
+			return true;
+		if (!(aThat instanceof Spectrum))
+			return false;
+		Spectrum that = (Spectrum) aThat;
+		return this.name.equals(that.name);
+	}
+
+	@Override public int hashCode()
+	{
+		return name.hashCode();
+	}
 }

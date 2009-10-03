@@ -98,6 +98,11 @@ public class GameEngine
 		eventQueue.add(initialCommand);
 	}
 
+	protected void addAmbientLighting(Spectrum spec)
+	{
+		missionMap.addAmbientLighting(spec);
+	}
+
 	/**
 	* Scatters random items randomly across the map.
 	*/

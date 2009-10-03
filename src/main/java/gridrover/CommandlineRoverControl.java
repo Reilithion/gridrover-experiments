@@ -21,7 +21,8 @@ package gridrover;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.Calendar;
 import java.text.DateFormat;
 
@@ -146,13 +147,31 @@ public class CommandlineRoverControl implements RoverControlInterface
 	public void describeLocation(MapSquare location)
 	{
 		System.out.println("Elevation: " + location.getElevation());
-		System.out.println("Contents of this square:");
-		ArrayList<Thing> contentsOfSquare = location.getInventory();
+		/*System.out.println("Contents of this square:");
+		List<Thing> contentsOfSquare = location.getInventory();
 		for (Thing p : contentsOfSquare)
 		{
 			System.out.println("	Physical Object: " + p.getName());
 			System.out.println("		Mass = " + p.getMass());
 			System.out.println("		Bulk = " + p.getBulk());
+		}*/
+	}
+
+	public void describeLighting(List<Spectrum> lighting)
+	{
+		System.out.println("In this square, the following Spectra are illuminated:");
+		for (Spectrum spec : lighting)
+		{
+			System.out.println("\t" + spec.getName());
+		}
+	}
+
+	public void describeObjectAppearance(Set<ResponseBean> responses)
+	{
+		System.out.println("Object:");
+		for (ResponseBean re : responses)
+		{
+			System.out.println("\t" + re.getAction().toString() + " " + re.getColor() + " " + re.getShape() + " " + re.getSpectrum());
 		}
 	}
 
