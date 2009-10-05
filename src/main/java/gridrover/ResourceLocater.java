@@ -17,11 +17,14 @@
 */
 
 package gridrover;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.prefs.Preferences;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
 * This class is designed to facilitate the locating of data resources for
@@ -33,6 +36,7 @@ import java.util.prefs.Preferences;
 */
 public class ResourceLocater
 {
+	private static Log log = LogFactory.getLog(ResourceLocater.class);
 	private static final String DATA_FILE_PATH = "data_file_path";
 
 	private File preferredLocation;
@@ -88,21 +92,21 @@ public class ResourceLocater
 		}
 		if (resource != null)
 		{
-			Debug.debug(name + " found in preferred location.");
+			log.debug(name + " found in preferred location.");
 			return resource;
 		}
 		// try to get the resource from the classloader.
 		resource = loader.getResourceAsStream(name);
 		if (resource != null)
 		{
-			Debug.debug(name + " found via classloader.");
+			log.debug(name + " found via classloader.");
 			return resource;
 		}
 		// try to get the resource from the Preferences construct.
 		resource = getResourceFromPreferences(name);
 		if (resource != null)
 		{
-			Debug.debug(name + " found via Preferences.");
+			log.debug(name + " found via Preferences.");
 			return resource;
 		}
 		// try to get the resource from the current directory.
@@ -113,7 +117,7 @@ public class ResourceLocater
 		catch (FileNotFoundException e) {}
 		if (resource != null)
 		{
-			Debug.debug(name + " found in current directory.");
+			log.debug(name + " found in current directory.");
 			return resource;
 		}
 		// try to get the resource from the ./data/ directory.
@@ -123,9 +127,9 @@ public class ResourceLocater
 		}
 		catch (FileNotFoundException e) {}
 		if (resource != null)
-			Debug.debug(name + " found in ./data directory.");
+			log.debug(name + " found in ./data directory.");
 		else
-			Debug.debug(name + " not found. ?_?");
+			log.debug(name + " not found. ?_?");
 		return resource;
 	}
 
@@ -148,7 +152,7 @@ public class ResourceLocater
 		String dataFilePath = prefs.get(DATA_FILE_PATH, null);
 		if (dataFilePath != null)
 		{
-			Debug.debug("Preferences data file path = " + dataFilePath);
+			log.debug("Preferences data file path = " + dataFilePath);
 			File path = new File(dataFilePath);
 			try
 			{

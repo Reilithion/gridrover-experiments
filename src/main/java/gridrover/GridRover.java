@@ -17,8 +17,11 @@
 */
 
 package gridrover;
+
 import java.util.prefs.Preferences;
 import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
 * This class is the main class of the GridRover application.  It initializes the
@@ -29,6 +32,7 @@ import java.util.List;
 */
 public class GridRover
 {
+	private static Log log = LogFactory.getLog(GridRover.class);
 	// Preference keys for this package
 	private static final String MAP_WIDTH = "map_width";
 	private static final String MAP_HEIGHT = "map_height";
@@ -47,56 +51,56 @@ public class GridRover
 		System.out.println("This is free software, and you are welcome to redistribute it");
 		System.out.println("under certain conditions; see LICENSE.TXT for details.\n");
 
-		System.out.println("Loading preferences...");
+		log.info("Loading preferences...");
 		Preferences prefs = Preferences.userNodeForPackage(GridRover.class);
 		int width = prefs.getInt(MAP_WIDTH, 10);
 		int length = prefs.getInt(MAP_HEIGHT, 10);
 		double maxElevation = prefs.getDouble(MAX_ELEVATION, 25.0);
 		int precision = prefs.getInt(ELEVATION_PRECISION, 2);
 
-		System.out.println("Loading data files...");
+		log.info("Loading data files...");
 
 		XmlFileParser fileParser = new XmlFileParser(new ResourceLocater(null));
 		List<Spectrum> spectra = fileParser.getSpectra("spectrum_types.xml");
-		Debug.debug("Checking we got our spectra.");
+		log.debug("Checking we got our spectra.");
 		for (Spectrum spec : spectra)
 		{
-			Debug.debug("Type: " + spec.getName());
+			log.debug("Type: " + spec.getName());
 			List<String> list = spec.getColors();
 			for (String color : list)
-				Debug.debug("\tColor: " + color);
+				log.debug("\tColor: " + color);
 			list = spec.getShapes();
 			for (String shape : list)
-				Debug.debug("\tShape: " + shape);
+				log.debug("\tShape: " + shape);
 		}
 		//List<Thing> itemPrototypes = fileParser.getThings("physical_objects.xml");
 		List<ThingBean> itemPrototypes = fileParser.getThings("physical_objects.xml", spectra);
-		Debug.debug("Checking we got our Things.");
+		log.debug("Checking we got our Things.");
 		for (ThingBean tb : itemPrototypes)
 		{
-			Debug.debug("Name: " + tb.getName());
-			Debug.debug("Mass: " + tb.getMinMass() + " - " + tb.getMaxMass());
-			Debug.debug("Density: " + tb.getMinDensity() + " - " + tb.getMaxDensity());
+			log.debug("Name: " + tb.getName());
+			log.debug("Mass: " + tb.getMinMass() + " - " + tb.getMaxMass());
+			log.debug("Density: " + tb.getMinDensity() + " - " + tb.getMaxDensity());
 			List<AppearanceBean> appearance = tb.getAppearanceBeans();
 			for (AppearanceBean ab : appearance)
 			{
-				Debug.debug("Under the " + ab.getStimulus() + " spectrum, " + tb.getName() + " reacts with:");
+				log.debug("Under the " + ab.getStimulus() + " spectrum, " + tb.getName() + " reacts with:");
 				List<ResponseBean> responses = ab.getResponseBeans();
 				for (ResponseBean rb : responses)
 				{
-					Debug.debug(rb.getSpectrumAction().toString() + " " + rb.getColor() + " " + rb.getShape() + " in spectrum " + rb.getSpectrum());
+					log.debug(rb.getSpectrumAction().toString() + " " + rb.getColor() + " " + rb.getShape() + " in spectrum " + rb.getSpectrum());
 				}
 			}
 		}
 
-		System.out.println("Initializing GridRover...");
+		log.info("Initializing GridRover...");
 		GameEngine engine = new GameEngine(width, length, maxElevation, precision);
 		Rover rover = new Rover("Rover", 185.0, 5.52, 100.0, new CommandlineRoverControl()); // Mass 185.0 kg, 1.5 meters tall by 2.3 meters wide by 1.6 meters long
 		engine.addRover(rover, width/2, length/2); // Add a single rover in the middle of the map
 		engine.addAmbientLighting(spectra.get(0));
 		engine.scatterItemsRandomly(itemPrototypes, 0.5, 5); // 50% chance of items in a given square, up to 5 items per square
 
-		System.out.println("Running GridRover...");
+		log.info("Running GridRover...");
 		engine.eventLoop();
 		System.out.println("All events completed.  GridRover now terminating.");
 	}

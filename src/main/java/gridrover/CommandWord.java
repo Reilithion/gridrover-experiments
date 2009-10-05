@@ -21,6 +21,9 @@ package gridrover;
 import java.util.Calendar;
 import java.util.PriorityQueue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
 * This class enumerates our recognized engine commands.  If a command
 * is listed here, our engine should handle it somehow.
@@ -32,13 +35,14 @@ public enum CommandWord
 {
 	GO
 	{
+		private Log log = LogFactory.getLog(CommandWord.class);
 		void apply(Calendar startTime, PriorityQueue<Event> eventQueue, Rover rover, Command command)
 		{
 			Calendar eventStartTime = (Calendar) startTime.clone();
 			eventStartTime.add(Calendar.MILLISECOND, 50);
 			if (command.getArgs().length < 1)
 			{
-				Debug.debug("Argument length of less than 1.  Expected a direction.");
+				log.debug("Argument length of less than 1.  Expected a direction.");
 				rover.getControlInterface().commandFailed(command);
 				eventQueue.add(new CommandEvent(eventStartTime, eventQueue, rover));
 				return;

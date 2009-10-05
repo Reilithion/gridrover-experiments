@@ -16,11 +16,14 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import org.apache.commons.digester.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This is the XML file parser for GridRover.  Using Extractors it will extract desired information from a given xml file.
  */
 public class XmlFileParser {
+    private static Log log = LogFactory.getLog(XmlFileParser.class);
     private ResourceLocater resourceLocater;
     
     /**
@@ -75,7 +78,7 @@ public class XmlFileParser {
          if (doc != null) {
             NodeList thingList = doc.getDocumentElement().getChildNodes();
             int numberOfItems = thingList.getLength();
-            Debug.debug("Number of Items to read from file: " + numberOfItems);
+            log.debug("Number of Items to read from file: " + numberOfItems);
             for (int i = 0; i < numberOfItems; i++) {
                 Node thingNode = thingList.item(i);
                 if (thingNode.getNodeType() == Node.ELEMENT_NODE
@@ -124,7 +127,7 @@ public class XmlFileParser {
      	}
      	catch (Exception e)
      	{
-     		Debug.debug(e.toString());
+     		log.debug(e.toString());
      		return null;
      	}
      	return thingBeans;
@@ -147,7 +150,7 @@ public class XmlFileParser {
          }
          catch (Exception e)
          {
-         	Debug.debug(e.toString());
+         	log.debug(e.toString());
          	return null;
          }
          ArrayList<Spectrum> spectra = new ArrayList<Spectrum>();

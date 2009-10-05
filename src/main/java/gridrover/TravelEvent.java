@@ -21,6 +21,9 @@ package gridrover;
 import java.util.Calendar;
 import java.util.PriorityQueue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
 * A TravelEvent is a simulated event in which a Rover (or possibly some other object)
 * travels under its own power from one MapSquare to another.  For now, possible
@@ -43,6 +46,7 @@ import java.util.PriorityQueue;
 */
 public class TravelEvent extends Event
 {
+	private static Log log = LogFactory.getLog(TravelEvent.class);
 	private Rover rover;
 	private Command command;
 
@@ -64,7 +68,7 @@ public class TravelEvent extends Event
 	protected void apply()
 	{
 		Calendar eventStartTime = (Calendar) startTime.clone();
-		Debug.debug("Attempting to go " + command.getArgs()[0]);
+		log.debug("Attempting to go " + command.getArgs()[0]);
 		if (rover.go(command.getArgs()[0]))
 		{
 			eventStartTime.add(Calendar.MILLISECOND, 50000);

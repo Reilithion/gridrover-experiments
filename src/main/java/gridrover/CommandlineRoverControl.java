@@ -26,6 +26,9 @@ import java.util.Set;
 import java.util.Calendar;
 import java.text.DateFormat;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
 * This class acts as an interface between a console user and
 * the GridRover engine.  It allows a single player to control
@@ -36,6 +39,7 @@ import java.text.DateFormat;
 */
 public class CommandlineRoverControl implements RoverControlInterface
 {
+	private static Log log = LogFactory.getLog(CommandlineRoverControl.class);
 	private BufferedReader reader;
 
 	/**
@@ -96,7 +100,7 @@ public class CommandlineRoverControl implements RoverControlInterface
 	public void commandUnknown(Command command)
 	{
 		System.err.println("Unknown command \"" + command.getCommandWord().toString() + "\" ... which is weird, because we only produce known commands.");
-		Debug.debug("Something funky happened with the CommandlineRoverControl module.");
+		log.debug("Something funky happened with the CommandlineRoverControl module.");
 	}
 
 	/**
